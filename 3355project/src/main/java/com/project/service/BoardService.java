@@ -1,16 +1,15 @@
-package com.project.mybatisDAO;
+package com.project.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.project.entity.Board;
 
-@Mapper
-public interface BoardDao {
+public interface BoardService {
+
 	List<Board> getList(String boardlist, int page);
 	
 	int getCount(String boardlist);
 
 	List<Board> getDetail(int boardid);
+
 }
