@@ -77,6 +77,17 @@ export default new Vuex.Store({
             console.log("getDetail error: ", payload)
           });
     },
+    test({ commit }, payload){
+            axios.post('https://jsonplaceholder.typicode.com/tests',$store.state.account)
+            .then((res)=>{
+                console.log(res.data)
+            })
+            .catch((err)=>{
+                console.log(err)
+            }).finally(()=>{
+                //ddd
+            });
+    },
 
   },
 
