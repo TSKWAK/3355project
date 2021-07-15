@@ -1,54 +1,74 @@
 <template>
 <div style="text-align:left;">
   <hr>
-<form>
-  <div> 제목
-<b-form-input v-model="title" placeholder="Enter your name" style="width:70%"></b-form-input>
+<form method = "POST" @submit.prevent="write()">
+  <div style="margin-right: 10%"> 제목
+<b-form-input v-model="board.title" placeholder="Enter your name"></b-form-input>
 
   <hr>
 
-<select class="form-select" aria-label="Default select example" style="width:30%" v-model="select">
-  <option selected>{{select}}</option>
-  <option v-for="(category, i) in $store.state.category" v-bind:key="i" :value="category.name"
-  v-show="$store.state.url!=category.name">{{category.name}}</option>
+<select class="form-select" aria-label="Default select example" style="width:30%" v-model="board.category">
+  <option selected></option>
+  <option v-for="(category, i) in $store.state.category" v-bind:key="i" :value="category.name">
+    {{category.name}}
+  </option>
 </select>
 
   <hr>
+  <div class="mb-3" style="width:30%">
+  <label for="formFileSm" class="form-label"></label>
+  <input class="form-control form-control-sm" id="files" ref="files" type="file">
+</div>
 
-  내용
     <b-form-textarea
     id="content" 
     placeholder="Tall textarea"
-    v-model="content"
-    rows="8"></b-form-textarea>
-
+    style=""
+    v-model="board.content"
+    rows="8">
+    </b-form-textarea>
+  <br>
+  <div align="right">
+    <button type="submit" class="btn btn-secondary">
+      <a href="/">전송</a></button>
+    <button type="button" class="btn btn-secondary">
+    <router-link :to="`/board/`+$store.state.url">취소</router-link>
+    </button>
   </div>
-  <button type="submit">전송</button>
+  </div>
 </form>
-  <button @click="click()">dfs</button>
+
 </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data(){
     return{
-      title: '',
-      content: '',
-      select: "게시판 카테고리를 선택하세요",
-    }
-  },
-  computed: {
-    select: ()=> {
-      return this.$store.state.url;
+      board: 
+        {title: '', content: '', hit: 0, pop: 0, category: ''}
     }
   },
   methods: {
-    click(){
-      console.log(this.title, this.content, this.select)
+    write(){
+            console.log(this.board);
+            axios.post('/api/board/write',this.board)
+                .then(res=>{
+                    console.log(res)
+                }).catch(err=>{
+                    console.log(err)
+                    console.log(this.board)
+                }).finally({
+                    
+                });
+    },
+    clicks(){
+           alert('등록되었습니다')
+           
+           
     },
   }
-
 }
 </script>
 

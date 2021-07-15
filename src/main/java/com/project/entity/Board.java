@@ -9,11 +9,10 @@ public class Board {
 	private int pop;
 	private String date;
 	private String category;
-	private int page;
 	
 	public Board() {}
 
-	public Board(int board_id, int rownum, String title, String content, int hit, int pop, String date, String category, int page) {
+	public Board(int board_id, int rownum, String title, String content, int hit, int pop, String date, String category) {
 		super();
 		this.board_id = board_id;
 		this.rownum = rownum;
@@ -23,7 +22,6 @@ public class Board {
 		this.pop = pop;
 		this.date = date;
 		this.category = category;
-		this.page = page;
 		
 	}
 
@@ -89,14 +87,6 @@ public class Board {
 
 	public void setRownum(int rownum) {
 		this.rownum = rownum;
-	}
-
-	public int getPage() {
-		return page;
-	}
-
-	public void setPage(int page) {
-		this.page = page;
 	}
 
 }

@@ -12,6 +12,8 @@ const routes = [
   { path: '/board/*', name: 'list', component: () => import('@/components/board/BoardList.vue') },
   { path: '/detail', name: 'detail', component: () => import('@/components/board/BoardDetail.vue') },
   { path: '/write', name: 'write', component: () => import('@/components/board/BoardWrite.vue') },
+  { path: '/write2', name: 'write2', component: () => import('@/components/board/BoardWrite2.vue') },
+  { path: '/write3', name: 'write3', component: () => import('@/components/board/BoardWrite3.vue') },
 
 
   //--------- User Page ------------//

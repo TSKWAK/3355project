@@ -13,4 +13,6 @@ public interface BoardDao {
 	int getCount(String boardlist);
 
 	List<Board> getDetail(int boardid);
+
+	void addWrite(String title, String content, int hit, int pop, String category);
 }

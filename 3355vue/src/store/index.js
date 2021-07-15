@@ -16,6 +16,9 @@ export default new Vuex.Store({
     boardlist: [0],
     count: '',
     detail: [0],
+    page: 1,
+    paging: 1,
+    startnum: 1,
   },
 
   //mutations
@@ -34,7 +37,16 @@ export default new Vuex.Store({
 
     getDetail:(state, payload) => {
       state.detail = payload
-    }
+    },
+
+    
+
+    changePage:(state, payload) => {
+      state.page = ((payload.page-1)*10)
+      state.paging = payload.paging
+      state.startnum = (payload.page-(payload.page-1)%5)
+      console.log(state.page, state.paging, state.startnum)
+    },
   },
 
   //actions
@@ -44,8 +56,8 @@ export default new Vuex.Store({
           .get("/api/board/"+payload.name+"?page="+payload.page)
           .then(res => {
             commit("boardUrl", payload.name),
-            commit("getData", res.data)
-            console.log("getList: ",res)
+            commit("getData", res.data),
+            console.log("getList: ", res.data)
           })
           .catch(err => {
               console.log(err)
@@ -77,18 +89,6 @@ export default new Vuex.Store({
             console.log("getDetail error: ", payload)
           });
     },
-    test({ commit }, payload){
-            axios.post('https://jsonplaceholder.typicode.com/tests',$store.state.account)
-            .then((res)=>{
-                console.log(res.data)
-            })
-            .catch((err)=>{
-                console.log(err)
-            }).finally(()=>{
-                //ddd
-            });
-    },
-
   },
 
   getters: {

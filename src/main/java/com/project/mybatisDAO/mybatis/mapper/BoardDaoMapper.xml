@@ -26,4 +26,10 @@
   update board set hit = hit+1 where board_id= ${boardid};
   </select>
   
+  <!-- 게시판 글쓰기 저장 -->
+  <select id="addWrite" resultType="com.project.entity.Board">
+  insert into board(title, content, hit, pop, category) values ('${param1}', '${param2}', ${param3}, ${param4}, '${param5}')
+  </select>
+  
+ 
 </mapper>

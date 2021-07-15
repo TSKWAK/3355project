@@ -1,7 +1,9 @@
 <template>
   <div>
     <div v-for="(detail,i) in $store.state.detail" :key="i">
+
    <hr>
+
    <table class="table" style="width:98%">
 			<thead>
 				<tr class="table-active">
@@ -11,28 +13,30 @@
           조회: {{detail.hit}} / 댓글수: 0 / 추천수: 0</th>
 				</tr>
 			</thead>
-      <!-- <tbody>
-        <td class="tdcontent">{{detail.content}}</td>
-      </tbody> -->
 		</table>
+
    <hr>
-   <div id="content" style="text-align:left;">
-     afsd{{detail.content}}
+
+   <div id="content" style="text-align:left; height: 300px">
+     {{detail.content}}
   </div>
-<!--    
-<div>
-    <h1>디테일페이지</h1><br>
-    <div v-for="(detail,i) in $store.state.detail" :key="i">
-    제목 = {{detail.title}}<br>
-    내용 = {{detail.content}}<br>
-    날짜 = {{detail.date}}<br>
-    조회수 = {{detail.hit}}<br>
-    추천수 = {{detail.pop}}<br>
-    </div>
-</div> -->
+
+    <div>댓글
+      <table border="1">
+        <tr>
+          <td>ddd</td>
+          <td>ddd</td>
+        </tr>
+        <tr>
+          <td style="width:50%">ffffff</td>
+        </tr>
+
+      </table>
     </div>
 
-  </div>
+</div>
+
+</div>
 </template>
 
 <script>
