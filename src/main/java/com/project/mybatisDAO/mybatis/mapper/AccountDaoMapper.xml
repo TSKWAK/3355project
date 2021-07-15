@@ -11,18 +11,18 @@
   </select>
   
   <!-- 특정유저 보기 -->
-  <select id="viewUserDao" resultType="com.project.entity.Users">
-    select * from Users where id = #{param1}
+  <select id="viewUserDao" resultType="Int">
+    select count(*) from Users where userId = #{param1}
   </select>
   
   <!-- 유저추가하기 -->
   <insert id="addUserDao">
-  	insert into Users (userId, userPw, userEmail) values (#{param1}, #{param2}, #{param3})
+  	insert into Users (userId, userPw, userEmail) values (#{param1}, #{param2}, sha1(#{param3}))
   </insert>
   
   <!-- 유저삭제하기 -->
   <delete id="deleteUserDao">
-  	delete from Users where id=#{param1}
+  	delete from Users where userId=#{param1}
   </delete>
   
 </mapper>
