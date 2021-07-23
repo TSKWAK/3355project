@@ -1,19 +1,16 @@
 package com.project.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.project.entity.Login;
 import com.project.entity.Users;
-import com.project.mybatisDAO.AccountDao;
 
-@Service
-public class AccountService {
-	@Autowired
-	private AccountDao dao;
-
-	public Users login(Users users) {
-		Users user = dao.login(users);
-		return user;
-	}
-
+public interface AccountService {
+	
+	public void accountReg(Users users);
+	public String checkEmail(String userEmailAddr);
+	public int checkUserId(String userId);
+	public int userLogin(Login login);
+	public void addSocialUser(String userId, String userEmail, String social);
+	public int viewSocialUser(String userId, String userEmail, String social);
+	public String viewUserEmail(String userId);
+	public void setPw(Login login);
 }

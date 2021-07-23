@@ -72,5 +72,5 @@
   update board set title=#{title}, category = #{category}, content=#{content} where board_id= #{bod};
   </select>
   
+ </mapper>
  
-</mapper>

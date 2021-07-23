@@ -1,7 +1,7 @@
 package com.project.service;
 
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,8 +37,4 @@ public class BoardServiceImp implements BoardService{
 			List<Board> list = dao.getBestList(category);
 			return list;
 		}
-
-		
-
-		
 }

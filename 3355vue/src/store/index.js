@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import VueSession from 'vue-session'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store =  new Vuex.Store({
   //state
   state: {
     // Category.vue
@@ -41,6 +42,7 @@ export default new Vuex.Store({
     commentCheck: 0,
     blurbRandom: 1,
     MainImg: 'soccer',
+
   },
 
   //mutations
@@ -60,7 +62,7 @@ export default new Vuex.Store({
     getDetail:(state, payload) => {
       state.detail = payload
     },
-
+    
     changePage:(state, payload) => {
       state.page = ((payload.page-1)*10)
       state.paging = payload.paging
@@ -111,7 +113,6 @@ export default new Vuex.Store({
       state.MainImg = payload
       console.log('mainimg:', state.MainImg)
     }
-
   },
 
   //actions
@@ -129,7 +130,7 @@ export default new Vuex.Store({
             
             
           })
-          .catch(err => {
+        .catch(err => {
               console.log(err)
           });
       },
@@ -161,7 +162,7 @@ export default new Vuex.Store({
             console.log("getDetail error: ", payload)
           });
       },
-      
+    },
 
       getDayCount({commit}, payload){
             axios
@@ -247,14 +248,7 @@ export default new Vuex.Store({
           });
       },
 
-      
-
-      
-    
-  },
-
-  getters: {
-
-  }
-  
 })
+
+
+export default store
