@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -29,6 +30,7 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+<<<<<<< HEAD
 
 axios.defaults.headers.common = {
   "jwt-auth-token": router.app.$session.get('accesstoken'),
@@ -83,3 +85,24 @@ axios.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+=======
+=======
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue)
+
+
+Vue.config.productionTip = false
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')
+>>>>>>> branch 'master' of https://github.com/TSKWAK/3355project.git
+>>>>>>> refs/remotes/origin/master

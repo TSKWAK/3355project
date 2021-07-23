@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 module.exports = {
     devServer: {
         proxy: {
@@ -9,3 +10,16 @@ module.exports = {
         }
     },
 }
+=======
+module.exports = {
+    devServer: {
+        proxy: {
+            '/api':{
+                target: 'http://localhost:9000',
+                ws: true,
+                changeOrigin: true
+            }
+        }
+    },
+}
+>>>>>>> refs/remotes/origin/master
