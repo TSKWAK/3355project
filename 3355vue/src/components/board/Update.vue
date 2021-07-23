@@ -58,7 +58,7 @@
         <!-- submit 버튼 & 취소 버튼-->
           <div style="margin-left:75%">
             <b-button pill v-b-modal.update variant="dark" style="margin:5px"
-              v-show="$store.state.userCheck === 'true'">
+              v-show="$session.has('userId')">
               확인
              </b-button>
 
@@ -125,7 +125,7 @@ export default {
             axios.get('/api/board/update?bId='+this.getDetails[0].board_id+'&t='+this.getDetails[0].title+
             '&c='+this.getDetails[0].category+'&con='+this.getDetails[0].content)
                 .then(res=>{
-                    this.$store.dispatch('getDetail', {bId:this.getDetails[0].board_id, uId:this.$session.get('jwt')})
+                    this.$store.dispatch('getDetail', {bId:this.getDetails[0].board_id, uId:this.$session.get('userId')})
                     alert('게시글이 수정되었습니다')
                     this.$router.push('/detail')
                     console.log(this.getDetails)

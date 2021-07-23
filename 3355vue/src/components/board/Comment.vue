@@ -19,17 +19,17 @@
     </div>
         <div>
         <span style="float:right;">| {{com.date}} |
-        <b-button pill variant="primary" v-show="com.comment_user_id != $session.get('jwt')">답글</b-button>
+        <b-button pill variant="primary" v-show="com.comment_user_id != $session.get('userId')">답글</b-button>
         
         <!-- 댓글 수정 버튼-->
         <b-button pill variant="light" 
-        v-show="com.comment_user_id = $session.get('jwt')"
+        v-show="com.comment_user_id = $session.get('userId')"
         @click="commentIdcheck(com.comment_id)">
         <i class="fa fa-pencil" aria-hidden="true"></i>
         </b-button>
 
         <!-- 댓글 삭제 버튼-->
-        <b-button pill variant="light" v-show="com.comment_user_id = $session.get('jwt')"
+        <b-button pill variant="light" v-show="com.comment_user_id = $session.get('userId')"
         @click="commentDelete(com.comment_id)">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         </b-button>
@@ -57,7 +57,7 @@
     </div> <br>
     <div style="float:right;">
         <b-button pill v-b-modal.modal-no variant="dark" style=""
-          v-show="$store.state.userCheck === 'true'">
+          v-show="$session.has('userId')">
             확인 </b-button>
 
           <b-modal id="modal-no" 
@@ -80,7 +80,7 @@ export default {
         text: '',
         comment:{
             content: '',
-            comment_user_id: this.$session.get('jwt'),
+            comment_user_id: this.$session.get('userId'),
             comment_board_id: this.$store.state.boardId,
         },
         comments: [],

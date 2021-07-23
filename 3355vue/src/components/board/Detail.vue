@@ -47,7 +47,7 @@
 
       <!-- 게시글 삭제 버튼+모달 -->
       <b-button pill v-b-modal.deletes variant="danger" style="margin:5px"
-              v-show="$store.state.userCheck === 'true'">
+              v-show="$session.has('userId')">
               <i class="fa fa-trash-o" aria-hidden="true"></i>
              </b-button>
 
@@ -77,7 +77,7 @@ import axios from 'axios'
 export default {
   data(){
     return{
-      userid: this.$session.get('jwt'),
+      userid: this.$session.get('userId'),
       like: 0,
       likebl: true,
       sss: '',
@@ -93,7 +93,7 @@ export default {
     },
     addPop(){
       if(this.$store.state.detail[0].user_id !== this.userid){
-      this.$store.dispatch('addPop', {bId: this.$store.state.boardId, uId: this.$session.get('jwt')});
+      this.$store.dispatch('addPop', {bId: this.$store.state.boardId, uId: this.$session.get('userId')});
       alert('좋아요를 누르셨습니다')
       console.log(this.$store.state.detail.user_id)
       }else{
@@ -101,7 +101,7 @@ export default {
       }
     },
     deletePop(){
-      this.$store.dispatch("deletePop", {bId: this.$store.state.boardId, uId: this.$session.get('jwt')});
+      this.$store.dispatch("deletePop", {bId: this.$store.state.boardId, uId: this.$session.get('userId')});
       alert('좋아요가 취소되었습니다');
     },
 

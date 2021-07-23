@@ -56,7 +56,7 @@
 
           <div style="margin-left:75%">
             <b-button pill v-b-modal.write variant="dark" style="margin:5px"
-              v-show="$store.state.userCheck === 'true'">
+              v-show="$session.has('userId')">
               확인
              </b-button>
 
@@ -100,7 +100,7 @@ export default {
             hit: 0, 
             pop: 0, 
             category: '카테고리를 선택해주세요', 
-            user_id: this.$session.get('jwt')
+            user_id: this.$session.get('userId')
             },
        }
   },

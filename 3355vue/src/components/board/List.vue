@@ -93,7 +93,7 @@
                   <div style="dispaly:inline-block; float:left;">
                 <router-link :to="`/write`">
                   <button type="button" class="btn btn-dark" style="height:40px; width:80px "
-                  v-show="$store.state.userCheck === 'true'">
+                  v-show="$session.has('userId')">
                     <i class="fa fa-pencil" aria-hidden="true"> write</i>
                   </button>
                 </router-link>
@@ -173,9 +173,9 @@ export default {
   },
   methods: {
     titleCheck(v){
-      if(this.$store.state.userCheck === 'true'){
-        this.$store.dispatch('getDetail', {bId:v, uId:this.$session.get('jwt')});
-        this.$store.dispatch('popCheck', {bId:v, uId: this.$session.get('jwt')})
+      if(this.$session.has('userId')){
+        this.$store.dispatch('getDetail', {bId:v, uId:this.$session.get('userId')});
+        this.$store.dispatch('popCheck', {bId:v, uId: this.$session.get('userId')})
         this.$store.commit("setBoardId", v)
         this.$router.push('/detail')
         console.log("v:",v)
