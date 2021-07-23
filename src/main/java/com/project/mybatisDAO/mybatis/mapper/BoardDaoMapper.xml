@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -27,34 +26,4 @@
   update board set hit = hit+1 where board_id= ${boardid};
   </select>
   
-=======
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mybatisDAO.BoardDao">
-
-
-<!-- 어떤 쿼리문인지 꼭 주석처리 해주기 바람 
-		나중에 더 헷갈림   -: 진현 -->
-
-
-<!-- 게시판 리스트 -->
-  <select id="getList" resultType="com.project.entity.Board">
-    select @rownum:=@rownum+1 as rownum, board.* from board, 
-	(select @rownum:=0) rownum where category = '${boardlist}' order by rownum desc limit ${page}, 10
-  </select>
-  
- <!-- 게시판 페이징 -->
-  <select id="getCount" resultType="Int">
-  select count(*) count from board where category = '${boardlist}'
-  </select>
-  
-  <!-- 게시판 상세페이지 + 조회수 증가 -->
-  <select id="getDetail" resultType="com.project.entity.Board">
-  select * from board where board_id = ${boardid};
-  update board set hit = hit+1 where board_id= ${boardid};
-  </select>
-  
->>>>>>> branch 'master' of https://github.com/TSKWAK/3355project.git
 </mapper>
