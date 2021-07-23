@@ -1,13 +1,13 @@
 <template>
 <div>
 <center><div class="col col-lg-8 col-sm-10" id = "Box">
-              <h2>회원가입</h2>
+              <h2>회원가입</h2><br><br>
             <form id = "login-form" method = "POST" @submit.prevent="addUser">
                       <div class="input-group mb-4">
                           <span class="input-group-text" id="inputGroup-sizing-default">&nbsp;아이디&nbsp;&nbsp;</span>
                           <input type="text" name = "userId" class="form-control" placeholder="아이디를 입력하세요." v-model="account.userId"
                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                          <button type="button" class="btn btn-secondary" @click="checkUserId">중복확인</button>
+                          <button type="button" class="btn btn-secondary join" @click="checkUserId">중복확인</button>
                         </div>
 
                         <div class="input-group mb-4">
@@ -63,7 +63,7 @@
                                 <option value="paran.com">paran.com</option>
                                 <option value="tmpbox.net">tmpbox.net</option>
                               </select>
-                            <button type="button" class="btn btn-secondary" @click="sendEmail">인증</button>
+                            <button type="button" class="btn btn-secondary join" @click="sendEmail">인증</button>
                         </div>
 
                         <div class="input-group mb-4" v-if="show">
@@ -71,7 +71,7 @@
                             <input type="text" name = "mailCode" class="form-control" placeholder="인증번호를 입력하세요"
                             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
                             v-model="inputKey">
-                            <button type="button" class="btn btn-secondary" @click="checkEmail">확인</button>
+                            <button type="button" class="btn btn-secondary join" @click="checkEmail">확인</button>
                         </div>
 
                         <div class="input-group mb-4">
@@ -79,8 +79,8 @@
                         </div>
 
                         <div class="btn_list">
-                          <button type="button" class="btn btn-primary" onClick="location.href='/'">취소</button>
-                          <button type="submit" class="btn btn-success">확인</button>
+                          <button type="button" class="btn btn-primary join" onClick="location.href='/'">취소</button>
+                          <button type="submit" class="btn btn-success join">확인</button>
                         </div>
                 </form>
         </div></center>
@@ -123,7 +123,7 @@ export default {
                 .then(res=>{
                     console.log(res)
                     alert("회원가입이 완료되었습니다.")
-                    this.$router.push('/')
+                    this.$router.push('/login')
                 }).catch(err=>{
                     console.log(err)
                 }).finally({
@@ -139,7 +139,7 @@ export default {
             if(this.account.userId==""){
                 this.idError="아이디를 입력하세요.";
             } else{
-            console.log(this.userId);
+            console.log(this.account.userId);
 
             axios.get('/api/user/checkUserId?userId='+this.account.userId)
                 .then(res=>{
@@ -235,7 +235,7 @@ export default {
     .joinput{
         margin-top: 40px;
     }
-    button{
+    .join{
         margin-left: 20px;
     }
 </style>

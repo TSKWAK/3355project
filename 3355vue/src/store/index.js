@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import VueSession from 'vue-session'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store =  new Vuex.Store({
   //state
   state: {
     // Category.vue
@@ -16,6 +17,14 @@ export default new Vuex.Store({
     boardlist: [0],
     count: '',
     detail: [0],
+
+    // account: {
+    //   userId: '',
+    //   message: 'Login',
+    //   status: '',
+    //   token: '',
+    // },
+
   },
 
   //mutations
@@ -34,7 +43,21 @@ export default new Vuex.Store({
 
     getDetail:(state, payload) => {
       state.detail = payload
-    }
+    },
+
+    // setAccount: (state, payload) => {
+    //   state.account.userId = payload.data.data.userId
+    //   state.account.message = 'Logout'
+    //   state.account.status = 'true'
+    //   state.account.token = payload.headers["jwt-auth-token"]
+    // },
+
+    // delAccount: (state, payload) => {
+    //   state.account.userId = payload.userId
+    //   state.account.message = payload.message
+    //   state.account.status = payload.status
+    //   state.account.token = payload.token
+    // }
   },
 
   //actions
@@ -47,7 +70,7 @@ export default new Vuex.Store({
             commit("getData", res.data)
             console.log("getList: ",res)
           })
-          .catch(err => {
+        .catch(err => {
               console.log(err)
           });
       },
@@ -77,18 +100,6 @@ export default new Vuex.Store({
             console.log("getDetail error: ", payload)
           });
     },
-    test({ commit }, payload){
-            axios.post('https://jsonplaceholder.typicode.com/tests',$store.state.account)
-            .then((res)=>{
-                console.log(res.data)
-            })
-            .catch((err)=>{
-                console.log(err)
-            }).finally(()=>{
-                //ddd
-            });
-    },
-
   },
 
   getters: {
@@ -96,3 +107,6 @@ export default new Vuex.Store({
   }
   
 })
+
+
+export default store

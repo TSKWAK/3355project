@@ -7,33 +7,27 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class Users {
+public class Login {
+	
 	private String userId;
 	private String userPw;
-	private String userEmail;
-	private String mailAddr;
 	
 	
+	
+	public Login(String userId, String userPw) {
+		this.userId = userId;
+		this.userPw = userPw;
+	}
 	
 	public String getUserId() {
 		return userId;
 	}
-
 	public String getUserPw() {
 		return userPw;
-	}
-
-	public String getUserEmail() {
-		return userEmail;
-	}
-
-	public Users(String userId, String userPw, String userEmail, String mailAddr) {
-		this.userId = userId;
-		this.userPw = userPw;
-		this.userEmail = userEmail + "@" + mailAddr;
 	}
 	
 }
