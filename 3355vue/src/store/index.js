@@ -100,10 +100,6 @@ const store =  new Vuex.Store({
             console.log("getDetail error: ", payload)
           });
     },
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
     test({ commit }, payload){
             axios.post('https://jsonplaceholder.typicode.com/tests',$store.state.account)
             .then((res)=>{
@@ -115,9 +111,6 @@ const store =  new Vuex.Store({
                 //ddd
             });
     },
->>>>>>> branch 'master' of https://github.com/TSKWAK/3355project.git
-
->>>>>>> refs/remotes/origin/master
   },
 
   getters: {
