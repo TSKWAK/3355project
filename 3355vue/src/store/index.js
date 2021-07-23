@@ -9,16 +9,38 @@ export default new Vuex.Store({
   state: {
     // Category.vue
     category: [
-      {name: 'freeboard'}, {name: 'soccer'}, {name: 'baseball'}, {name: 'basketball'}, 
-      {name: 'bollyball'}, {name: 'tenis'}, {name: 'golf'} 
+      {name: 'freeboard'}, 
+      {name: 'soccer'}, 
+      {name: 'baseball'}, 
+      {name: 'basketball'}, 
+      {name: 'bollyball'}, 
+      {name: 'tenis'}, 
+      {name: 'golf'} 
     ],
+
+    category2: ['freeboard', 'soccer', 'baseball', 'basketball', 'bollyball', 'tenis', 'golf'],
+    
+    dayCount2: [],
+    popCheck: false,
+
+    logo: 'logo',
     url: 'freeboard',
+
+    boardId: 0,
     boardlist: [0],
+    bestlist: [],
     count: '',
     detail: [0],
     page: 1,
     paging: 1,
     startnum: 1,
+    userCheck: 'false',
+    dayCount: [],
+    commentCount: 0,
+    categoryName: '',
+    commentCheck: 0,
+    blurbRandom: 1,
+    MainImg: 'soccer',
   },
 
   //mutations
@@ -39,14 +61,57 @@ export default new Vuex.Store({
       state.detail = payload
     },
 
-    
-
     changePage:(state, payload) => {
       state.page = ((payload.page-1)*10)
       state.paging = payload.paging
       state.startnum = (payload.page-(payload.page-1)%5)
       console.log(state.page, state.paging, state.startnum)
     },
+
+    userCheck:(state, payload) => {
+      state.userCheck = payload
+    },
+
+    getDayCount:(state, payload) => {
+      state.dayCount2 = payload
+    },
+
+    popCheck: (state, payload) => {
+      state.popCheck = payload
+      console.log("popcheckPayload:",payload)
+      console.log("statepopCheck:",state.popCheck)
+    },
+
+    setBoardId: (state, payload) => {
+      state.boardId = payload
+    },
+
+    setCommentCount: (state, payload) => {
+      state.commentCount = payload
+    },
+
+    getBestList: (state, payload) => {
+      state.bestlist = payload
+    },
+
+    setCategoryName: (state, payload) => {
+      state.categoryName = payload
+    },
+
+    setCommentCheck: (state, payload) => {
+      state.commentCheck = payload
+    },
+
+    setBlurb: (state,payload) => {
+      state.blurbRandom = payload
+      console.log("blurbRandom:", state.blurbRandom)
+    },
+
+    setMainImg: (state,payload) => {
+      state.MainImg = payload
+      console.log('mainimg:', state.MainImg)
+    }
+
   },
 
   //actions
@@ -57,7 +122,12 @@ export default new Vuex.Store({
           .then(res => {
             commit("boardUrl", payload.name),
             commit("getData", res.data),
+            commit("setMainImg", payload.name),
             console.log("getList: ", res.data)
+            var blurb = Math.floor(Math.random() * 7)+1;
+            commit("setBlurb", blurb)
+            
+            
           })
           .catch(err => {
               console.log(err)
@@ -77,18 +147,110 @@ export default new Vuex.Store({
     },
 
     getDetail({commit}, payload){
-      axios
-          .get("/api/board/detail/"+payload)
+        axios
+          .get("/api/board/detail/"+payload.bId)
           .then(res => {
             commit("getDetail", res.data)
-            console.log(res)
-            console.log("getDetail data: ", payload)
+            this.dispatch("popCheck", {bId: payload.bId, uId: payload.uId})
+            console.log("Detail res:",res)
+            console.log("Detail res.data:",res.data)
+            console.log("getDetail payload: ", payload)
           })
           .catch(err => {
             console.log(err)
             console.log("getDetail error: ", payload)
           });
-    },
+      },
+      
+
+      getDayCount({commit}, payload){
+            axios
+            .all([axios.get("/api/board/dayCount?c=freeboard"), 
+                  axios.get("/api/board/dayCount?c=soccer"),
+                  axios.get("/api/board/dayCount?c=baseball"),
+                  axios.get("/api/board/dayCount?c=basketball"),
+                  axios.get("/api/board/dayCount?c=bollyball"),
+                  axios.get("/api/board/dayCount?c=tenis"),
+                  axios.get("/api/board/dayCount?c=golf")
+          ])
+            .then(
+              axios.spread((res1, res2, res3, res4, res5, res6, res7) => {
+              const re = [
+                res1.data, res2.data, res3.data, res4.data, res5.data, res6.data, res7.data
+              ]
+              commit("getDayCount", re)
+                console.log("this.soccer:",this.state.dayCount2)
+            })
+            )
+            .catch(err => {
+              console.log(err)
+            })
+      },
+
+
+      addPop({commit}, payload){
+        axios
+        .get("api/board/addpop?bId="+payload.bId+"&uId="+payload.uId)
+        .then(res => {
+          if(res.data = 'null' && res.data == ''){
+          commit("popCheck", true)
+          console.log("addPop res.data:", res.data)
+          console.log("addPop res:", res)
+          this.dispatch("getDetail", {bId:payload.bId, uId:payload.uId})
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      },
+
+      deletePop({commit}, payload){
+        axios
+        .get("api/board/deletepop?bId="+payload.bId+"&uId="+payload.uId)
+        .then(res => {
+          commit("popCheck", false)
+          console.log("addPop res.data:", res.data)
+          console.log("addPop res:", res)
+          this.dispatch("getDetail", {bId:payload.bId, uId:payload.uId})
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      },
+
+      popCheck({commit}, payload){
+        axios
+        .get("api/board/popCheck?bId="+payload.bId+"&uId="+payload.uId)
+        .then(res => {
+          if(res.data = 'null' && res.data==''){
+            commit("popCheck", false)
+            console.log("popcheck res:",res)
+          }else{
+            commit("popCheck", true)
+            console.log("popcheck return:", res)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      },
+
+      getBestList({commit}, payload){
+        axios
+          .get("/api/board/bestlist?cn="+payload)
+          .then(res => {
+            commit("getBestList", res.data),
+            console.log("getBestList: ", res.data)
+          })
+          .catch(err => {
+              console.log(err)
+          });
+      },
+
+      
+
+      
+    
   },
 
   getters: {

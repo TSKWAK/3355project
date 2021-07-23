@@ -12,5 +12,6 @@ public interface AccountDao {
 	public int viewUserDao(String userId);
 	public int addUserDao(String userId, String UserPw, String UserEmail);
 	public int deleteUserDao(String userId);
+	public Users login(Users users);
 	
 }

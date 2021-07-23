@@ -1,6 +1,7 @@
 package com.project.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,25 +12,33 @@ import com.project.mybatisDAO.BoardDao;
 public class BoardServiceImp implements BoardService{
 
 		@Autowired
-		private BoardDao BoardDao;
+		private BoardDao dao;
 		
 		@Override
 		public List<Board> getList(String boardlist, int page) {
-			List<Board> list = BoardDao.getList(boardlist, page);
+			List<Board> list = dao.getList(boardlist, page);
 			return list;
 		}
 
 		@Override
 		public int getCount(String boardlist) {
-			int page = BoardDao.getCount(boardlist);
+			int page = dao.getCount(boardlist);
 			return page;
 		}
 
 		@Override
 		public List<Board> getDetail(int boardid) {
-			List<Board> detail = BoardDao.getDetail(boardid);
+			List<Board> detail = dao.getDetail(boardid);
 			return detail;
 		}
+
+		@Override
+		public List<Board> getBestList(String category) {
+			List<Board> list = dao.getBestList(category);
+			return list;
+		}
+
+		
 
 		
 }

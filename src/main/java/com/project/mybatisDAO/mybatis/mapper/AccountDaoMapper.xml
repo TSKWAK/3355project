@@ -25,4 +25,8 @@
   	delete from Users where userId=#{param1}
   </delete>
   
+  <select id="login" resultType="com.project.entity.Users">
+  SELECT userId, userPw FROM users WHERE userId = '${userId}' AND userPw = '${userPw}'
+  </select>
+  
 </mapper>

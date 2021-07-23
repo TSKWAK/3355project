@@ -5,9 +5,10 @@ import java.util.Random;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.entity.Users;
 import com.project.mybatisDAO.AccountDao;
+import com.project.service.AccountService;
 
 @RestController
 @RequestMapping("/api/user")
@@ -28,6 +30,12 @@ public class AccountController {
 	
 	@Autowired
 	AccountDao dao;
+	
+	@Autowired
+	AccountService service;
+	
+	@Autowired
+	HttpSession session;
 	
 	@PostMapping("/accountReg")
 	public void account_reg(@RequestBody Users users) {
@@ -86,6 +94,23 @@ public class AccountController {
 		System.out.println(cnt);
 		
 		return cnt;
+	}
+	
+	@PostMapping("/login")
+	public String login(@RequestBody Users users){
+		System.out.println("users:"+users);
+		Users user = service.login(users);
+		System.out.println("user:"+user);
+		String userId = "";
+		
+		if(user != null) {
+			session.setAttribute("user", user);
+			System.out.println("로그인 성공");
+			userId = user.getUserId();
+		}else {
+			return "";
+		}
+		return userId;
 	}
 	
 	

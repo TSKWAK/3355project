@@ -22,6 +22,8 @@ public class Users {
 	public String getUserEmail() {
 		return userEmail;
 	}
+	
+	public Users() {}
 
 	public Users(String userId, String userPw, String userEmail, String mailAddr) {
 		super();

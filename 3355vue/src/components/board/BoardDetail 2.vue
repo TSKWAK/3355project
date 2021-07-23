@@ -16,10 +16,12 @@
 		</table>
 
    <hr>
-
+<div>
+     <Viewer ref="toastuiEditor" height="1000px" :initialValue="content"/>
+</div>
    <div id="content" style="text-align:left; height: 300px">
-     {{detail.content}}
-  </div>
+     <!-- {{detail.content}} -->
+    </div>
 
     <div>댓글
       <table border="1">
@@ -41,7 +43,30 @@
 
 <script>
 export default {
+  data(){
+    return{
+      content: 'fsdafs',
+      conten: [0],
+      con: this.$store.state.board.content
+    }
+  },
+  mounted(){
+    console.log(this.content)
+    fetch('/api/board/details/287')
+    .then(response => {
+      if(response.ok){
+        return response.json();
+      } else {
+        throw response;
+      }
+    }).then(data => {
+      this.content=data;
+      console.log("data:",data)
+      console.log("content:",this.content)
+  });
+  }
 
+  
 }
 </script>
 
