@@ -1,37 +1,45 @@
 <template>
+<div style="margin-bottom:100px;">
 <div>
-<div>
-  <b-navbar toggleable="lg" type="dark" variant="dark">
-    <router-link to="/">
-      <b-navbar-brand>
-      <b-img :src="require('@/assets/logo.png')" style="width:30px"></b-img>
+  <b-navbar toggleable="lg" type="dark" variant="dark" >
+    
+      <b-navbar-brand :to="'/'" style="text-decoration:none; color: white;">
+      <b-img :src="require('@/assets/logo.png')" style="width:30px;"></b-img>
       3355
       </b-navbar-brand>
-    </router-link>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
+          
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto" style="margin-left:auto">
-        <p class="badge bg-secondary text-wrap" style="margin-top:11px; color:black; font-size:15px;">{{this.$session.get('userId')}}</p>
-      <b-navbar-nav>
+        <span style="color:white; float:right;" v-show="$session.get('accesstoken')">
+            <i class="fa fa-heart" aria-hidden="true" style="margin-right:5px;"></i>  
+            <strong><span style="font-size:18px;">{{$session.get('userId')}}</span></strong>님, 안녕하세요^^* 
+          </span>
+
+        <!-- <p class="badge bg-secondary text-wrap" style="margin-top:11px; color:black; font-size:15px;">
+            {{this.$session.get('userId')}}</p> -->
+      </b-navbar-nav>
         
         <router-link to="/join">
-        <b-button v-if="!this.$session.has('accesstoken')" variant="outline-light" style="margin:5px; height:43px">Join</b-button>
+        <b-button v-if="!this.$session.has('accesstoken')" variant="outline-light" style="margin:5px;">Join</b-button>
         </router-link>
-        <b-button variant="outline-light" style="margin:5px" @click="logInOut">{{message}}</b-button>
-      </b-navbar-nav>
 
-      </b-navbar-nav>
+        <b-button variant="outline-light" style="margin:5px" @click="logInOut">{{message}}</b-button>
+
+        
+      
+
   </b-navbar>
 </div>
 
 
   <b-container fluid>
     <b-row>
-      <b-col id="mainclass">
-        <router-link to="/">
-        <b-img :src="require('@/assets/logo.png')" style="width:50px; color: white;"></b-img>
+      <b-col id="mainclass" :style="{ backgroundImage: 'url(' + MainImg + ')' }">
+        <router-link to="/" style="width:50px; color: white; text-decoration:none;">
+        <b-img :src="require('@/assets/logo.png')" style="width:50px;">
+        </b-img>
         3355<br>
         </router-link>
       </b-col>
@@ -45,7 +53,8 @@
 export default {
   data(){
     return{
-      message:''
+      message:'',
+      MainImg: require('../../assets/soccer.jpg'),
     }
   },
   methods: {

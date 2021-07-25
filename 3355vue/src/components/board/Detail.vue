@@ -95,7 +95,7 @@ export default {
       if(this.$store.state.detail[0].user_id !== this.userid){
       this.$store.dispatch('addPop', {bId: this.$store.state.boardId, uId: this.$session.get('userId')});
       alert('좋아요를 누르셨습니다')
-      console.log(this.$store.state.detail.user_id)
+      console.log(this.$session.get('userId'))
       }else{
         alert('내 게시글입니다')
       }

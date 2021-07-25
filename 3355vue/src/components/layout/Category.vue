@@ -1,14 +1,13 @@
-<<<<<<< HEAD
 <template>
 <div>
 
   <!-- 카테고리 목록 생성 -->
       <h3>Category</h3><br>
       
-        <div class="text-center my-3">
+        <div class="text-center my-3" 
+          v-for="(category,i) in $store.state.category" :key="i">
           <b-button v-b-tooltip.hover.right 
-          v-for="(category,i) in $store.state.category" :key="i"
-           style="width:200px; margin-bottom:10px; text-decoration:none; color:white;"
+           style="width:200px; text-decoration:none; color:white;"
             @click="$store.dispatch('getData', {name: category.name, page: 0}),
                     $store.dispatch('getBestList', category.name),
                     $store.dispatch('getCount', category.name),
@@ -27,6 +26,7 @@
           {{$store.state.dayCount2[i]}}</b-badge>
           </b-button>
         </div>
+
   <!-- 카테고리 목록 생성 끝-->
 
   </div>

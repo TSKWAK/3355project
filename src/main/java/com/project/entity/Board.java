@@ -108,4 +108,12 @@ public class Board {
 		this.commentCount = commentCount;
 	}
 
+	@Override
+	public String toString() {
+		return "Board [board_id=" + board_id + ", rownum=" + rownum + ", title=" + title + ", content=" + content
+				+ ", hit=" + hit + ", pop=" + pop + ", date=" + date + ", category=" + category + ", user_id=" + user_id
+				+ ", commentCount=" + commentCount + "]";
+	}
+
+	
 }

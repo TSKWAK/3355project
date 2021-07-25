@@ -8,7 +8,7 @@
       <b-button variant="secondary">
       <b-badge variant="light">
         <i class="fa fa-user" aria-hidden="true"></i>
-        {{com.comment_id}}{{com.comment_user_id}} 님
+        {{com.comment_user_id}} 님
         </b-badge>
       </b-button>
 

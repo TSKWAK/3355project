@@ -42,6 +42,13 @@ const store =  new Vuex.Store({
     commentCheck: 0,
     blurbRandom: 1,
     MainImg: 'soccer',
+    freeboardBestList: '',
+    soccerBestList: '',
+    baseballBestList: '',
+    basketballBestList: '',
+    bollyballBestList: '',
+    tenisBestList: '',
+    golfBestList: '',
 
   },
 
@@ -112,6 +119,11 @@ const store =  new Vuex.Store({
     setMainImg: (state,payload) => {
       state.MainImg = payload
       console.log('mainimg:', state.MainImg)
+    },
+
+    setMainBestList: (state, payload) => {
+      state.setMainBestList = payload
+      console.log("MainBestList:", state.MainBestList)
     }
   },
 
@@ -127,10 +139,8 @@ const store =  new Vuex.Store({
             console.log("getList: ", res.data)
             var blurb = Math.floor(Math.random() * 7)+1;
             commit("setBlurb", blurb)
-            
-            
           })
-        .catch(err => {
+          .catch(err => {
               console.log(err)
           });
       },
@@ -162,7 +172,6 @@ const store =  new Vuex.Store({
             console.log("getDetail error: ", payload)
           });
       },
-    },
 
       getDayCount({commit}, payload){
             axios
@@ -248,7 +257,36 @@ const store =  new Vuex.Store({
           });
       },
 
-})
+      getMainBestList({commit}, payload){
+        axios
+        .all([axios.get("/api/board/bestlist?cn=freeboard"), 
+              axios.get("/api/board/bestlist?cn=soccer"),
+              axios.get("/api/board/bestlist?cn=baseball"),
+              axios.get("/api/board/bestlist?cn=basketball"),
+              axios.get("/api/board/bestlist?cn=bollyball"),
+              axios.get("/api/board/bestlist?cn=tenis"),
+              axios.get("/api/board/bestlist?cn=golf")
+      ])
+        .then(
+          axios.spread((res1, res2, res3, res4, res5, res6, res7) => {
+          // commit("setMainBestList", red)
+          this.state.freeboardBestList = res1.data;
+          this.state.soccerBestList = res2.data;
+          this.state.baseballBestList = res3.data;
+          this.state.basketballBestList = res4.data;
+          this.state.bollyballBestList = res5.data;
+          this.state.tenisBestList = res6.data;
+          this.state.golfBestList = res7.data;
 
+        })
+        )
+        .catch(err => {
+          console.log(err)
+        })
+  },
+    }
 
-export default store
+    })
+    
+    export default store
+  

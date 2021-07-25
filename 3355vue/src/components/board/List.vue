@@ -1,5 +1,5 @@
 <template>
-          <div container style="col-lg-12 col-md-8 col-sm-3 col-xs-1" >
+          <div container style="col-lg-12 col-md-8 col-sm-3 col-xs-1 margin-bottom:900px;"  >
             <div>
                 <h1 style="margin-right:200px;">인기글 TOP3</h1>
               <form class="d-flex" method = "get">
@@ -15,7 +15,6 @@
               </tr>
               <tr v-for="(bestlist,i) in $store.state.bestlist" :key="i">
                   <th scope="row">best{{i+1}}</th>
-                  <!-- <router-link :to="`/detail`"> -->
                   <td class="title" 
                   @click="titleCheck(bestlist.board_id)">
                     {{bestlist.title}} 
@@ -28,9 +27,7 @@
                     </i>
                   </span>
 
-                    
                   </td>
-                  <!-- </router-link> -->
                   <td style="width: 150px">{{bestlist.user_id}}</td>
                   <td style="width: 200px">{{bestlist.date}}</td>
                   <td style="width: 130px">{{bestlist.hit}}</td>
@@ -102,7 +99,7 @@
 
 
               <!-- 이전페이지 -->
-              <div style="text-align:center;">
+              <div style="text-align:center; margin-bottom:50px;" >
               <nav aria-label="Page navigation example" style="margin-left:35%">
                 <ul class="pagination" >
                   <li class="page-item">
@@ -148,13 +145,11 @@
                     </a>
                   </li>
                   <!-- 다음 페이지 끝 -->
+              <span style="margin-left:20px;"> page: {{$store.state.paging}} / {{$store.state.count}}</span>
                 </ul>
               </nav>
               </div>
-
-              <span style="margin-right:130px;">page: {{$store.state.paging}} / {{$store.state.count}}</span>
-              
-            </div>
+          </div>
 
 </template>
 <script>

@@ -3,7 +3,7 @@
 
   <Header/> <br>
       <div class="row">
-          <div class="cols col-sm-5 col-md-4 col-lg-3 col-xs-0" style="margin-top: 30px">
+          <div class="cols col-md-4 col-lg-3" style="margin-top: 30px">
             <Category/>
 
             <div>
@@ -14,7 +14,7 @@
 
           </div>
 
-          <div class="cols col-sm-7 col-md-8 col-lg-9 col-xs-12" style="margin-top: 30px">
+          <div class="cols col-sm-12 col-md-8 col-lg-9" style="margin-top: 30px">
             <router-view/>
           </div>
       </div> 
@@ -29,7 +29,6 @@ import Header from '@/components/layout/Header.vue'
 import Category from '@/components/layout/Category.vue'
 import Blurb from '@/components/layout/blurb.vue'
 import Footer from '@/components/layout/Footer.vue'
-import axios from 'axios'
 
 export default {
   data(){
@@ -88,4 +87,5 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
 </style>
