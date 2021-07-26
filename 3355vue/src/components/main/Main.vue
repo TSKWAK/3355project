@@ -12,7 +12,7 @@
     <div class="container">
       <div class="row">
         <hr style="width:1000px;"> 
-      <table class="table" style="width:300px; margin-right:50px;">
+      <table class="table" style="width:300px; margin-right:50px; ">
         <thead>
           <tr>
             <th scope="col" colspan="2">자유게시판
@@ -25,7 +25,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: freeboard.board_id, uId: freeboard.user_id})
             , $store.commit('boardUrl', freeboard.category)">
-            <router-link :to="'/detail'">{{freeboard.title}}</router-link>
+            <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{freeboard.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{freeboard.commentCount}} </i>
@@ -53,7 +53,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: soccer.board_id, uId: soccer.user_id})
             , $store.commit('boardUrl', soccer.category)">
-            <router-link :to="'/detail'">{{soccer.title}}</router-link>
+            <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{soccer.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{soccer.commentCount}} </i>
@@ -80,7 +80,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: baseball.board_id, uId: baseball.user_id})
             , $store.commit('boardUrl', baseball.category)">
-            <router-link :to="'/detail'">{{baseball.title}}</router-link>
+            <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{baseball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{baseball.commentCount}} </i>
@@ -107,7 +107,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: basketball.board_id, uId: basketball.user_id})
             , $store.commit('boardUrl', basketball.category)">
-            <router-link :to="'/detail'">{{basketball.title}}</router-link>
+            <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{basketball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{basketball.commentCount}} </i>
@@ -134,7 +134,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: bollyball.board_id, uId: bollyball.user_id})
             , $store.commit('boardUrl', bollyball.category)">
-            <router-link :to="'/detail'">{{bollyball.title}}</router-link>
+            <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{bollyball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{bollyball.commentCount}} </i>
@@ -161,7 +161,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: tenis.board_id, uId: tenis.user_id})
             , $store.commit('boardUrl', tenis.category)">
-            <router-link :to="'/detail'">{{tenis.title}}</router-link>
+            <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{tenis.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{tenis.commentCount}} </i>
@@ -188,7 +188,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: golf.board_id, uId: golf.user_id})
             , $store.commit('boardUrl', golf.category)">
-            <router-link :to="'/detail'">{{golf.title}}</router-link>
+            <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{golf.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{golf.commentCount}} </i>
