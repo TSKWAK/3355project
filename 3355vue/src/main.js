@@ -3,9 +3,24 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import BootstrapVue from 'bootstrap-vue'
+import { Editor, Viewer } from '@toast-ui/vue-editor'
+import VueSession from 'vue-session'
+import VBTogglePlugin from 'bootstrap-vue'
+import ModalPlugin from 'bootstrap-vue'
+import FormFilePlugin from 'bootstrap-vue'
+import BootstrapVueIcons from  'bootstrap-vue'
+import IconsPlugin from 'bootstrap-vue'
+import { JumbotronPlugin } from 'bootstrap-vue'
+import { VueEditor } from "vue2-editor";
+
+
+Vue.use(JumbotronPlugin)
+
+import 'codemirror/lib/codemirror.css'
+import '@toast-ui/editor/dist/toastui-editor.css'
+import '@toast-ui/editor/dist/i18n/ko-kr'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import VueSession from 'vue-session'
 import axios from 'axios'
 import VueKakaoSdk from 'vue-kakao-sdk'
 import GAuth from 'vue-google-oauth2'
@@ -15,7 +30,21 @@ const apiKey = '35b2de8fb66dd549381e6607539ede3d'
 Vue.use(GAuth, {clientId: '781179196713-5epc76uj073tvtv8ck0obefi24du0v07.apps.googleusercontent.com', scope: 'profile email https://www.googleapis.com/auth/plus.login'})
 
 
+var sessionOptions = {
+  persist: true
+}
+
+Vue.use(VueSession, sessionOptions)
 Vue.use(BootstrapVue)
+Vue.use(VBTogglePlugin)
+Vue.use(ModalPlugin)
+Vue.use(FormFilePlugin)
+Vue.use(BootstrapVueIcons)
+Vue.use(IconsPlugin)
+
+
+Vue.component('Editor', Editor)
+Vue.component('Viewer', Viewer)
 
 var sessionOptions = {
   persist: true
