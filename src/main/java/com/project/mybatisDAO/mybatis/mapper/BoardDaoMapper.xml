@@ -68,8 +68,8 @@
   update board set pop = pop-1 where board_id= ${bId};
   </select>
   
-  <select id="update" >
-  update board set title=#{title}, category = #{category}, content=#{content} where board_id= #{bod};
-  </select>
+  <update id="update">
+  update board set title=#{param3}, category = #{param2}, content=#{param4} where board_id= #{param1};
+  </update>
   
  </mapper>

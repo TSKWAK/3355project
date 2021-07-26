@@ -19,6 +19,6 @@ public interface BoardDao {
 	String addPop(int bId, String uId);
 	String deletePop(int bId, String uId);
 	String popCheck(int bId, String uId);
-	void update(int bod, String title, String category, String content);
+	void update(int bod, String category, String title, String content);
 	void deleteWrite(int bId);
 }

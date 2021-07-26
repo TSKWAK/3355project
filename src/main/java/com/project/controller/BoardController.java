@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.entity.Board;
+import com.project.entity.UpdateBoard;
 import com.project.mybatisDAO.BoardDao;
 import com.project.service.BoardService;
 
@@ -97,14 +98,13 @@ public class BoardController {
 			return result;
 		}
 		
-		@GetMapping("update")
-		public void update(@RequestParam("bId") int bod, @RequestParam("t") String title, @RequestParam("c") String category,
-				@RequestParam("con") String content) {
-			System.out.println(bod);
-			System.out.println(title);
-			System.out.println(category);
-			System.out.println(content);
-			dao.update(bod, title, category, content);
+		@PostMapping("update")
+		public void update(@RequestBody UpdateBoard board) {
+			System.out.println(board.getbId());
+			System.out.println(board.getC());
+			System.out.println(board.getT());
+			//System.out.println(board.getCon());
+			dao.update(board.getbId(), board.getC(), board.getT(), board.getCon());
 		}
 		
 		@GetMapping("deleteWrite")
