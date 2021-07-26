@@ -41,7 +41,7 @@
 
       <!-- 내용 입력 폼 -->
       <div>
-        <b-form-textarea
+        <!-- <b-form-textarea
           :state="validationContent"
           placeholder="내용을 5글자 이상 입력해주세요"
           rows="15"
@@ -49,7 +49,8 @@
           v-model="getDetails.content"
           >
           
-        </b-form-textarea>
+        </b-form-textarea> -->
+        <vue-editor id="editor" v-model="getDetails.content"> </vue-editor>
       </div>
       <br>
       <!-- 내용 입력 폼 끝 -->
@@ -87,7 +88,12 @@
 
 <script>
 import axios from 'axios'
+import { VueEditor } from "vue2-editor";
+
 export default {
+  components: {
+    VueEditor
+  },
     data(){
       return{
         str: '카테고리를 선택해주세요',
@@ -122,8 +128,12 @@ export default {
           });
       },
       update(){
-            axios.get('/api/board/update?bId='+this.getDetails[0].board_id+'&t='+this.getDetails[0].title+
-            '&c='+this.getDetails[0].category+'&con='+this.getDetails[0].content)
+            axios.post('/api/board/update',{
+              bId : this.getDetails[0].board_id,
+              t : this.getDetails[0].title,
+              c : this.getDetails[0].category,
+              con : this.getDetails[0].content,
+            })
                 .then(res=>{
                     this.$store.dispatch('getDetail', {bId:this.getDetails[0].board_id, uId:this.$session.get('userId')})
                     alert('게시글이 수정되었습니다')
