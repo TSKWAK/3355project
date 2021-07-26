@@ -373,7 +373,7 @@ const store =  new Vuex.Store({
               page: 1})
               this.dispatch('getCount', payload.category)
               this.dispatch('getDayCount', )
-              console.log(payload.user_id)
+              console.log(this.state.boardlist)
           })
           .catch(err=>{
               alert(err+' 다시 등록해주세요')
