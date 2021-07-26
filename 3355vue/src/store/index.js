@@ -136,7 +136,6 @@ const store =  new Vuex.Store({
             commit("getData", res.data),
             commit("setMainImg", payload.name),
             console.log("getList: ", res.data)
-
             var blurb = Math.floor(Math.random() * 7)+1;
             commit("setBlurb", blurb)
           })
