@@ -35,14 +35,6 @@
               </table>
               <!-- 인기글 리스트 끝 -->
                 
-                <!-- 글 검색 폼 -->
-                <!-- <input class="form-control me-2" type="검색" 
-                placeholder="검색어를 입력하세요" aria-label="Search"
-                style="width:200px; margin-left:60%; margin-bottom:20px">
-                <button class="btn btn-outline-success" type="submit" style="height:40px">
-                  검색
-                </button> -->
-                <!-- 글 검색 폼 끝 -->
              </form>
             </div>
 
@@ -62,7 +54,6 @@
               </tr>
               <tr v-for="(boardlist,i) in $store.state.boardlist" :key="i">
                   <th scope="row">{{boardlist.rownum}}</th>
-                  <!-- <router-link :to="`/detail`"> -->
                   <td class="title" 
                   @click="titleCheck(boardlist.board_id)">
                     {{boardlist.title}} 
@@ -168,16 +159,11 @@ export default {
   },
   methods: {
     titleCheck(v){
-      if(this.$session.has('userId')){
         this.$store.dispatch('getDetail', {bId:v, uId:this.$session.get('userId')});
         this.$store.dispatch('popCheck', {bId:v, uId: this.$session.get('userId')})
         this.$store.commit("setBoardId", v)
         this.$router.push('/detail')
         console.log("v:",v)
-      }else{
-        alert('로그인을 해주세요')
-        this.$router.push('/login')
-      }
     },
   }
 }

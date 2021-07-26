@@ -59,7 +59,7 @@ public class BoardController {
 		
 		@PostMapping("write")
 		public void write(@RequestBody Board board) {
-			System.out.println(board.getContent());
+			System.out.println(board);
 			
 			dao.addWrite(board.getTitle(), board.getContent(), board.getHit(), board.getPop(), board.getCategory(), board.getUser_id());
 		}
@@ -87,6 +87,9 @@ public class BoardController {
 		@GetMapping("popCheck")
 		public String popCheck(@RequestParam("bId") int bId, @RequestParam("uId") String uId) {
 			String result = dao.popCheck(bId, uId);
+			System.out.println(bId);
+			System.out.println(uId);
+			
 			
 			return result;
 		}

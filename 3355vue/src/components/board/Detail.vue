@@ -17,7 +17,7 @@
 		</table>
 
    <hr>
-    <div id="content" style="text-align:left; height: 300px" v-html="detail.content">
+    <div id="content" style="text-align:left; height: 500px" v-html="detail.content">
     </div>
 
     <div style="margin-right:40%;">
@@ -85,13 +85,17 @@ export default {
   components:{
     Comment
   },
+  
   methods: {
     updateWrite(){
       var router = this.$router;
       router.push('/update')
     },
+
     addPop(){
-      if(this.$store.state.detail[0].user_id !== this.userid){
+      if(!this.$session.has('accesstoken')){
+        alert('로그인을 해주세요')
+      }else if(this.$store.state.detail[0].user_id !== this.userid){
       this.$store.dispatch('addPop', {bId: this.$store.state.boardId, uId: this.$session.get('userId')});
       alert('좋아요를 누르셨습니다')
       console.log(this.$session.get('userId'))

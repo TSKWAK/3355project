@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import { placements, write } from '@popperjs/core'
 
 Vue.use(Vuex)
 
@@ -27,10 +28,10 @@ const store =  new Vuex.Store({
     url: 'freeboard',
 
     boardId: 0,
-    boardlist: [0],
+    boardlist: [],
     bestlist: [],
     count: '',
-    detail: [0],
+    detail: [],
     page: 1,
     paging: 1,
     startnum: 1,
@@ -48,6 +49,7 @@ const store =  new Vuex.Store({
     bollyballBestList: '',
     tenisBestList: '',
     golfBestList: '',
+    commentList: [],
 
   },
 
@@ -73,7 +75,6 @@ const store =  new Vuex.Store({
       state.page = ((payload.page-1)*10)
       state.paging = payload.paging
       state.startnum = (payload.page-(payload.page-1)%5)
-      console.log(state.page, state.paging, state.startnum)
     },
 
     userCheck:(state, payload) => {
@@ -86,8 +87,6 @@ const store =  new Vuex.Store({
 
     popCheck: (state, payload) => {
       state.popCheck = payload
-      console.log("popcheckPayload:",payload)
-      console.log("statepopCheck:",state.popCheck)
     },
 
     setBoardId: (state, payload) => {
@@ -112,17 +111,18 @@ const store =  new Vuex.Store({
 
     setBlurb: (state,payload) => {
       state.blurbRandom = payload
-      console.log("blurbRandom:", state.blurbRandom)
     },
 
     setMainImg: (state,payload) => {
       state.MainImg = payload
-      console.log('mainimg:', state.MainImg)
     },
 
     setMainBestList: (state, payload) => {
       state.setMainBestList = payload
-      console.log("MainBestList:", state.MainBestList)
+    },
+
+    setCommentList: (state, payload) => {
+      state.commentList = payload
     }
   },
 
@@ -133,11 +133,9 @@ const store =  new Vuex.Store({
         .get("/api/board/" + payload.name + "?page=" + payload.page)
         .then(res => {
           commit("boardUrl", payload.name),
-            commit("getData", res.data),
-            commit("setMainImg", payload.name),
-            console.log("getList: ", res.data)
-            var blurb = Math.floor(Math.random() * 7)+1;
-            commit("setBlurb", blurb)
+          commit("getData", res.data)
+          var blurb = Math.floor(Math.random() * 7)+1;
+          commit("setBlurb", blurb)
           })
           .catch(err => {
               console.log(err)
@@ -149,7 +147,6 @@ const store =  new Vuex.Store({
           .get("/api/board/count/"+payload)
           .then(res => {
             commit("getCount", res.data)
-            console.log("getCount: ",res)
           })
           .catch(err => {
             console.log(err)
@@ -157,22 +154,21 @@ const store =  new Vuex.Store({
     },
 
     getDetail({commit}, payload){
+      console.log("this.state.boardId=",this.state.boardId)
         axios
           .get("/api/board/detail/"+payload.bId)
           .then(res => {
-            commit("getDetail", res.data)
+            this.commit("getDetail", res.data)
+            this.commit("setBoardId", payload.bId)
             this.dispatch("popCheck", {bId: payload.bId, uId: payload.uId})
-            console.log("Detail res:",res)
-            console.log("Detail res.data:",res.data)
-            console.log("getDetail payload: ", payload)
           })
           .catch(err => {
             console.log(err)
-            console.log("getDetail error: ", payload)
+            console.log("payload:",payload.bId, payload.uId)
           });
       },
 
-      getDayCount({commit}, payload){
+    getDayCount({commit}, payload){
             axios
             .all([axios.get("/api/board/dayCount?c=freeboard"), 
                   axios.get("/api/board/dayCount?c=soccer"),
@@ -188,7 +184,6 @@ const store =  new Vuex.Store({
                 res1.data, res2.data, res3.data, res4.data, res5.data, res6.data, res7.data
               ]
               commit("getDayCount", re)
-                console.log("this.soccer:",this.state.dayCount2)
             })
             )
             .catch(err => {
@@ -197,12 +192,11 @@ const store =  new Vuex.Store({
       },
 
 
-      addPop({commit}, payload){
+    addPop({commit}, payload){
         axios
         .get("api/board/addpop?bId="+payload.bId+"&uId="+payload.uId)
         .then(res => {
           commit("getCount", res.data)
-          console.log("getCount: ", res)
         })
         .catch(err => {
           console.log(err)
@@ -213,17 +207,15 @@ const store =  new Vuex.Store({
       axios
         .get("/api/board/detail/" + payload.bId)
         .then(res => {
+          this.dispatch("getCommentList", payload.bId)
           commit("getDetail", res.data)
           this.dispatch("popCheck", { bId: payload.bId, uId: payload.uId })
-          console.log("Detail res:", res)
-          console.log("Detail res.data:", res.data)
-          console.log("getDetail payload: ", payload)
         })
         .catch(err => {
           console.log(err)
-          console.log("getDetail error: ", payload)
         });
     },
+
     getDayCount({ commit }, payload) {
       axios
         .all([axios.get("/api/board/dayCount?c=freeboard"),
@@ -240,7 +232,6 @@ const store =  new Vuex.Store({
               res1.data, res2.data, res3.data, res4.data, res5.data, res6.data, res7.data
             ]
             commit("getDayCount", re)
-            console.log("this.soccer:", this.state.dayCount2)
           }))
         .catch(err => {
           console.log(err)
@@ -253,8 +244,6 @@ const store =  new Vuex.Store({
         .then(res => {
           if (res.data = 'null' && res.data == '') {
             commit("popCheck", true)
-            console.log("addPop res.data:", res.data)
-            console.log("addPop res:", res)
             this.dispatch("getDetail", { bId: payload.bId, uId: payload.uId })
           }
         })
@@ -268,8 +257,6 @@ const store =  new Vuex.Store({
         .get("api/board/deletepop?bId=" + payload.bId + "&uId=" + payload.uId)
         .then(res => {
           commit("popCheck", false)
-          console.log("addPop res.data:", res.data)
-          console.log("addPop res:", res)
           this.dispatch("getDetail", { bId: payload.bId, uId: payload.uId })
         })
         .catch(err => {
@@ -283,10 +270,8 @@ const store =  new Vuex.Store({
         .then(res => {
           if (res.data = 'null' && res.data == '') {
             commit("popCheck", false)
-            console.log("popcheck res:", res)
           } else {
             commit("popCheck", true)
-            console.log("popcheck return:", res)
           }
         })
         .catch(err => {
@@ -298,8 +283,7 @@ const store =  new Vuex.Store({
       axios
         .get("/api/board/bestlist?cn=" + payload)
         .then(res => {
-          commit("getBestList", res.data),
-            console.log("getBestList: ", res.data)
+          commit("getBestList", res.data)
           })
           .catch(err => {
               console.log(err)
@@ -332,10 +316,74 @@ const store =  new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
-  },
-    }
+      },
 
-    })
+      getCommentList({commit}, payload){
+        axios
+          .get('/api/board/comment/list?bId='+payload)
+          .then(res => {
+            commit('setCommentList', res.data),
+            this.dispatch('commentCount', payload)
+          })
+          .catch(err => {
+            console.log(err)
+          });
+      },
+
+      commentCount({commit}, payload){
+        axios
+          .get('/api/board/comment/count?bId='+payload)
+          .then(res => {
+            commit('setCommentCount', res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          });
+      },
+
+      addComment({commit}, payload){
+        axios
+          .get('/api/board/comment/add?c='+payload.content+'&uId='+payload.uId+'&bId='+payload.bId)
+          .then(res => {
+            this.dispatch('getCommentList', payload.bId);
+          })
+          .catch(err => {
+            console.log(err)
+          });
+      },
+
+      deleteComment({commit}, payload){
+        axios
+          .get('/api/board/comment/delete?bId='+payload.bId+'&cId='+payload.cId)
+          .then(res => {
+            alert('댓글이 삭제되었습니다')
+            this.dispatch('getCommentList', payload.bId);
+          })
+          .catch(err => {
+            console.log(err)
+            console.log(v)
+          });
+      },
+
+      boardWrite({commit}, payload){
+        axios.
+          post('/api/board/write',payload)
+          .then(res=>{
+              this.dispatch('getData', {name: payload.category, 
+              page: 1})
+              this.dispatch('getCount', payload.category)
+              this.dispatch('getDayCount', )
+              console.log(payload.user_id)
+          })
+          .catch(err=>{
+              alert(err+' 다시 등록해주세요')
+              console.log(err)
+          });
+        },
+
+  }
+
+})
     
     export default store
   
