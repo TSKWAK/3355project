@@ -22,7 +22,10 @@
         <tbody>
           <tr v-for="(freeboard, i) in $store.state.freeboardBestList" :key="i">
             <th scope="row">no.{{i+1}}</th>
-            <td>{{freeboard.title}}
+            <td
+            @click="$store.dispatch('getDetail', {bId: freeboard.board_id, uId: freeboard.user_id})
+            , $store.commit('boardUrl', freeboard.category)">
+            <router-link :to="'/detail'">{{freeboard.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{freeboard.commentCount}} </i>
@@ -47,7 +50,10 @@
         <tbody>
           <tr v-for="(soccer, i) in $store.state.soccerBestList" :key="i">
             <th scope="row">no.{{i+1}}</th>
-            <td>{{soccer.title}}
+            <td
+            @click="$store.dispatch('getDetail', {bId: soccer.board_id, uId: soccer.user_id})
+            , $store.commit('boardUrl', soccer.category)">
+            <router-link :to="'/detail'">{{soccer.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{soccer.commentCount}} </i>
@@ -71,7 +77,10 @@
         <tbody>
           <tr v-for="(baseball, i) in $store.state.baseballBestList" :key="i">
             <th scope="row">{{i+1}}</th>
-            <td>{{baseball.title}}
+            <td
+            @click="$store.dispatch('getDetail', {bId: baseball.board_id, uId: baseball.user_id})
+            , $store.commit('boardUrl', baseball.category)">
+            <router-link :to="'/detail'">{{baseball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{baseball.commentCount}} </i>
@@ -95,7 +104,10 @@
         <tbody>
           <tr v-for="(basketball, i) in $store.state.basketballBestList" :key="i">
             <th scope="row">{{i+1}}</th>
-            <td>{{basketball.title}}
+            <td
+            @click="$store.dispatch('getDetail', {bId: basketball.board_id, uId: basketball.user_id})
+            , $store.commit('boardUrl', basketball.category)">
+            <router-link :to="'/detail'">{{basketball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{basketball.commentCount}} </i>
@@ -119,7 +131,10 @@
         <tbody>
           <tr v-for="(bollyball, i) in $store.state.bollyballBestList" :key="i">
             <th scope="row">{{i+1}}</th>
-            <td>{{bollyball.title}}
+            <td
+            @click="$store.dispatch('getDetail', {bId: bollyball.board_id, uId: bollyball.user_id})
+            , $store.commit('boardUrl', bollyball.category)">
+            <router-link :to="'/detail'">{{bollyball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{bollyball.commentCount}} </i>
@@ -143,7 +158,10 @@
         <tbody>
           <tr v-for="(tenis, i) in $store.state.tenisBestList" :key="i">
             <th scope="row">{{i+1}}</th>
-            <td>{{tenis.title}}
+            <td
+            @click="$store.dispatch('getDetail', {bId: tenis.board_id, uId: tenis.user_id})
+            , $store.commit('boardUrl', tenis.category)">
+            <router-link :to="'/detail'">{{tenis.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{tenis.commentCount}} </i>
@@ -167,7 +185,10 @@
         <tbody>
           <tr v-for="(golf, i) in $store.state.golfBestList" :key="i">
             <th scope="row">{{i+1}}</th>
-            <td>{{golf.title}}
+            <td
+            @click="$store.dispatch('getDetail', {bId: golf.board_id, uId: golf.user_id})
+            , $store.commit('boardUrl', golf.category)">
+            <router-link :to="'/detail'">{{golf.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{golf.commentCount}} </i>
