@@ -34,6 +34,7 @@ public class BoardController {
 		@RequestMapping("bestlist")
 		public List<Board> bestlist(@RequestParam("cn") String category) {
 			List<Board> list = service.getBestList(category);
+			System.out.println(list.toString());
 			return list;
 		}
 		
@@ -77,6 +78,7 @@ public class BoardController {
 		public String addPop(@RequestParam("bId") int bId, @RequestParam("uId") String uId) {
 			System.out.println("bid:"+bId+","+"uid:"+uId);
 			String result = dao.addPop(bId, uId);
+			System.out.println("addpopResult"+result);
 
 			return result;
 		}

@@ -16,9 +16,6 @@ import { VueEditor } from "vue2-editor";
 
 Vue.use(JumbotronPlugin)
 
-import 'codemirror/lib/codemirror.css'
-import '@toast-ui/editor/dist/toastui-editor.css'
-import '@toast-ui/editor/dist/i18n/ko-kr'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import axios from 'axios'
@@ -42,9 +39,6 @@ Vue.use(FormFilePlugin)
 Vue.use(BootstrapVueIcons)
 Vue.use(IconsPlugin)
 
-
-Vue.component('Editor', Editor)
-Vue.component('Viewer', Viewer)
 
 var sessionOptions = {
   persist: true
