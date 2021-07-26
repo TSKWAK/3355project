@@ -3,7 +3,6 @@ package com.project.service;
 import com.project.entity.Login;
 import com.project.entity.Users;
 
-
 public interface AccountService {
 	
 	public void accountReg(Users users);
