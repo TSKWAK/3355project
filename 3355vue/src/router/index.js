@@ -9,13 +9,6 @@ const routes = [
 
 
   //-------- Board Page -----------//
-<<<<<<< HEAD
-  { path: '/board/*', name: 'list', component: () => import('@/components/board/List.vue'), meta:{unauthorized : true}},
-  { path: '/detail', name: 'detail', component: () => import('@/components/board/Detail.vue'), meta:{unauthorized : true}},
-  { path: '/comment', name: 'comment', component: () => import('@/components/board/Comment.vue') },
-  { path: '/write', name: 'write', component: () => import('@/components/board/Write.vue'), },
-  { path: '/update', name: 'update', component: () => import('@/components/board/Update.vue') },
-=======
   { path: '/board/*', name: 'list', component: () => import('@/components/board/List.vue'), 
   meta:{unauthorized : true}},
   { path: '/detail', name: 'detail', component: () => import('@/components/board/Detail.vue'), 
@@ -26,7 +19,6 @@ const routes = [
   meta:{unauthorized : true}},
   { path: '/update', name: 'update', component: () => import('@/components/board/Update.vue'), 
   meta:{unauthorized : true}},
->>>>>>> branch 'develop' of https://github.com/TSKWAK/3355project.git
 
 
   //--------- User Page ------------//

@@ -136,17 +136,7 @@ const store =  new Vuex.Store({
             commit("getData", res.data),
             commit("setMainImg", payload.name),
             console.log("getList: ", res.data)
-<<<<<<< HEAD
-          var blurb = Math.floor(Math.random() * 7) + 1;
-          commit("setBlurb", blurb)
-            
-            
-        })
-        .catch(err => {
-          console.log(err)
-        });
-    },
-=======
+
             var blurb = Math.floor(Math.random() * 7)+1;
             commit("setBlurb", blurb)
           })
@@ -154,13 +144,9 @@ const store =  new Vuex.Store({
               console.log(err)
           });
       },
->>>>>>> branch 'develop' of https://github.com/TSKWAK/3355project.git
 
     getCount({ commit }, payload) {
       axios
-<<<<<<< HEAD
-        .get("/api/board/count/" + payload)
-=======
           .get("/api/board/count/"+payload)
           .then(res => {
             commit("getCount", res.data)
@@ -215,7 +201,6 @@ const store =  new Vuex.Store({
       addPop({commit}, payload){
         axios
         .get("api/board/addpop?bId="+payload.bId+"&uId="+payload.uId)
->>>>>>> branch 'develop' of https://github.com/TSKWAK/3355project.git
         .then(res => {
           commit("getCount", res.data)
           console.log("getCount: ", res)
@@ -316,15 +301,6 @@ const store =  new Vuex.Store({
         .then(res => {
           commit("getBestList", res.data),
             console.log("getBestList: ", res.data)
-<<<<<<< HEAD
-        })
-        .catch(err => {
-          console.log(err)
-        });
-    },
-  },
-})
-=======
           })
           .catch(err => {
               console.log(err)
@@ -351,7 +327,6 @@ const store =  new Vuex.Store({
           this.state.bollyballBestList = res5.data;
           this.state.tenisBestList = res6.data;
           this.state.golfBestList = res7.data;
->>>>>>> branch 'develop' of https://github.com/TSKWAK/3355project.git
 
         })
         )
