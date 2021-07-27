@@ -75,7 +75,7 @@ export default {
         this.$session.destroy("status")
         alert('로그아웃되었습니다.')
         this.message = 'Login'
-        this.$router.go();
+        this.$router.push('/login')
       }
 
 

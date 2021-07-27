@@ -5,16 +5,16 @@
    <hr>
 
    <table class="table" style="width:98%">
-			<thead>
-				<tr class="table-active">
-					<th scope="col" style="text-align:left;">[{{$store.state.url}}] 제목:{{detail.title}}<br>
+            <thead>
+                <tr class="table-active">
+                    <th scope="col" style="text-align:left;">[{{$store.state.url}}] 제목:{{detail.title}}<br>
           {{detail.date}}</th>
           <th scope="col" style="text-align:right;">작성자:{{detail.user_id}}<br>
           조회: {{detail.hit}} / 댓글수: {{$store.state.commentCount}} / 
             추천수: {{detail.pop}}</th>
-				</tr>
-			</thead>
-		</table>
+                </tr>
+            </thead>
+        </table>
 
    <hr>
     <div id="content" style="text-align:left; height: 500px" v-html="detail.content">
