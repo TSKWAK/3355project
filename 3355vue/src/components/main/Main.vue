@@ -23,8 +23,10 @@
           <tr v-for="(freeboard, i) in $store.state.freeboardBestList" :key="i">
             <th scope="row">no.{{i+1}}</th>
             <td
-            @click="$store.dispatch('getDetail', {bId: freeboard.board_id, uId: freeboard.user_id})
-            , $store.commit('boardUrl', freeboard.category)">
+            @click="
+            $store.dispatch('getDetail', {bId: freeboard.board_id, uId: $session.get('userId')}), 
+            $store.commit('setBoardId', freeboard.board_id),
+            $store.commit('boardUrl', freeboard.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{freeboard.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -51,8 +53,9 @@
           <tr v-for="(soccer, i) in $store.state.soccerBestList" :key="i">
             <th scope="row">no.{{i+1}}</th>
             <td
-            @click="$store.dispatch('getDetail', {bId: soccer.board_id, uId: soccer.user_id})
-            , $store.commit('boardUrl', soccer.category)">
+            @click="$store.dispatch('getDetail', {bId: soccer.board_id, uId: soccer.user_id}), 
+            $store.commit('setBoardId', soccer.board_id),
+            $store.commit('boardUrl', soccer.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{soccer.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -78,8 +81,9 @@
           <tr v-for="(baseball, i) in $store.state.baseballBestList" :key="i">
             <th scope="row">{{i+1}}</th>
             <td
-            @click="$store.dispatch('getDetail', {bId: baseball.board_id, uId: baseball.user_id})
-            , $store.commit('boardUrl', baseball.category)">
+            @click="$store.dispatch('getDetail', {bId: baseball.board_id, uId: baseball.user_id}), 
+            $store.commit('setBoardId', baseball.board_id),
+            $store.commit('boardUrl', baseball.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{baseball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -105,8 +109,9 @@
           <tr v-for="(basketball, i) in $store.state.basketballBestList" :key="i">
             <th scope="row">{{i+1}}</th>
             <td
-            @click="$store.dispatch('getDetail', {bId: basketball.board_id, uId: basketball.user_id})
-            , $store.commit('boardUrl', basketball.category)">
+            @click="$store.dispatch('getDetail', {bId: basketball.board_id, uId: basketball.user_id}),
+            $store.commit('setBoardId', basketball.board_id),
+            $store.commit('boardUrl', basketball.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{basketball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -132,8 +137,9 @@
           <tr v-for="(bollyball, i) in $store.state.bollyballBestList" :key="i">
             <th scope="row">{{i+1}}</th>
             <td
-            @click="$store.dispatch('getDetail', {bId: bollyball.board_id, uId: bollyball.user_id})
-            , $store.commit('boardUrl', bollyball.category)">
+            @click="$store.dispatch('getDetail', {bId: bollyball.board_id, uId: bollyball.user_id}),
+            $store.commit('setBoardId', bollyball.board_id),
+            $store.commit('boardUrl', bollyball.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{bollyball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -159,8 +165,9 @@
           <tr v-for="(tenis, i) in $store.state.tenisBestList" :key="i">
             <th scope="row">{{i+1}}</th>
             <td
-            @click="$store.dispatch('getDetail', {bId: tenis.board_id, uId: tenis.user_id})
-            , $store.commit('boardUrl', tenis.category)">
+            @click="$store.dispatch('getDetail', {bId: tenis.board_id, uId: tenis.user_id}),
+            $store.commit('setBoardId', tenis.board_id),
+            $store.commit('boardUrl', tenis.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{tenis.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -186,8 +193,9 @@
           <tr v-for="(golf, i) in $store.state.golfBestList" :key="i">
             <th scope="row">{{i+1}}</th>
             <td
-            @click="$store.dispatch('getDetail', {bId: golf.board_id, uId: golf.user_id})
-            , $store.commit('boardUrl', golf.category)">
+            @click="$store.dispatch('getDetail', {bId: golf.board_id, uId: golf.user_id}),
+            $store.commit('setBoardId', golf.board_id),
+            $store.commit('boardUrl', golf.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{golf.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">

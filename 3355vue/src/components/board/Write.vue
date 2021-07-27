@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-    <b-form method = "POST" @submit.prevent="write()">
+    <b-form method = "POST">
 
       <!-- 제목 입력 칸 -->
       <b-form-input v-model="board.title" :state="validation" id="feedback-user" style="width: 95%"
@@ -63,11 +63,12 @@
 
               <b-modal id="write" 
               hide-backdrop content-class="shadow" 
-              title="" @ok="write()" >
+              title="" @ok="write()">
 
                   정말로 <code>게시글</code>을
                   등록 하시겠습니까?
               </b-modal>
+
         <!-- <b-button type="submit" variant="danger" style="margin-left:10px;"
         @click="addComment()">확인</b-button> -->
           <router-link :to="`/board/`+$store.state.url">
@@ -86,7 +87,6 @@
 </template>
  
 <script>
-import axios from 'axios'
 import { VueEditor } from "vue2-editor";
  
 export default {
@@ -117,65 +117,26 @@ export default {
       }
   },
     methods: {
-
-      // handleImageAdded: function(file, Editor, cursorLocation, resetUploader) {
-      // // An example of using FormData
-      // // NOTE: Your key could be different such as:
-      // // formData.append('file', file)
-
-      // var formData = new FormData();
-      // formData.append("image", file);
-
-      // axios({
-      //   url: "https://fakeapi.yoursite.com/images",
-      //   method: "POST",
-      //   data: formData
-      // })
-      //   .then(result => {
-      //     let url = result.data.url; // Get url from response
-      //     Editor.insertEmbed(cursorLocation, "image", url);
-      //     resetUploader();
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
-      // },
-
-
       write(){
         this.board.content = this.htmlForEditor
 
         if(this.board.title.length > 1 && this.board.category != this.str 
-           && this.board.content.length > 5){
-            console.log(this.board);
-            axios.post('/api/board/write',this.board)
-                .then(res=>{
-                  var router = this.$router;
-                    alert('게시글이 등록되었습니다')
-                    this.$store.dispatch('getData', {name: this.board.category, 
-                    page: 1})
-                    this.$store.dispatch('getCount', this.board.category)
-                    this.$store.dispatch('getDayCount', )
-                    router.push('/board/'+this.board.category)
-                    console.log(this.board.user_id)
-                }).catch(err=>{
-                    alert(err+' 다시 등록해주세요')
-                    console.log(err)
-                    var router = this.$router;
-                    router.push('/write')
-                });
+          && this.board.content.length > 5){
+            this.$store.dispatch('boardWrite', this.board)
+            alert('게시글이 등록되었습니다')
+            this.$router.push('/')
       }else if(this.board.title.length < 1){
         alert('제목을 1자 이상 입력해주세요')
       }else if(this.board.category === this.str){
         alert('카테고리를 선택해주세요')
       }else if(this.board.content.length < 5){
         alert('내용을 5자 이상 입력해주세요')
-      } 
+      }
+      
     },
+     
 
-  },
-  mounted() {
-    
-  },
+  }
 }
+
 </script>

@@ -53,13 +53,15 @@ public class BoardController {
 		
 		@RequestMapping("detail/{boardid}")
 		public List<Board> detail(@PathVariable("boardid") int boardid){
+			System.out.println("boardid=" + boardid);
 			List<Board> detail = service.getDetail(boardid);
+			System.out.println("detail=" + detail);
 			return detail;
 		}
 		
 		@PostMapping("write")
 		public void write(@RequestBody Board board) {
-			System.out.println(board.getContent());
+			System.out.println(board);
 			
 			dao.addWrite(board.getTitle(), board.getContent(), board.getHit(), board.getPop(), board.getCategory(), board.getUser_id());
 		}
@@ -87,6 +89,9 @@ public class BoardController {
 		@GetMapping("popCheck")
 		public String popCheck(@RequestParam("bId") int bId, @RequestParam("uId") String uId) {
 			String result = dao.popCheck(bId, uId);
+			System.out.println(bId);
+			System.out.println(uId);
+			
 			
 			return result;
 		}
