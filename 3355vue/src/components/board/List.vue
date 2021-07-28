@@ -154,7 +154,6 @@ export default {
       page: 1,
       paging: 1,
       startnum: 1,
-
     }
   },
   methods: {

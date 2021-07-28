@@ -18,7 +18,8 @@ const routes = [
   { path: '/write', name: 'write', component: () => import('@/components/board/Write.vue'), 
   meta:{unauthorized : true}},
   { path: '/update', name: 'update', component: () => import('@/components/board/Update.vue'), 
-  meta:{unauthorized : true}},
+    meta: { unauthorized: true }
+  },
 
 
   //--------- User Page ------------//

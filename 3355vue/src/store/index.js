@@ -276,7 +276,7 @@ const store =  new Vuex.Store({
         axios
           .get('/api/board/comment/list?bId='+payload)
           .then(res => {
-            commit('setCommentList', res.data),
+            commit('setCommentList', res.data)
             this.dispatch('commentCount', payload)
           })
           .catch(err => {

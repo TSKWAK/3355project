@@ -7,7 +7,7 @@
 <center>
 <h2 style="margin-bottom:45px; margin-right:25%;">카테고리별 인기글 TOP3</h2>
 </center>
-<div>
+<div v-bind:style="{color: fcolor}">
   
     <div class="container">
       <div class="row">
@@ -27,7 +27,7 @@
             $store.dispatch('getDetail', {bId: freeboard.board_id, uId: $session.get('userId')}), 
             $store.commit('setBoardId', freeboard.board_id),
             $store.commit('boardUrl', freeboard.category)">
-            <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{freeboard.title}}</router-link>
+            <router-link v-bind:style="{color: fcolor}" :to="'/detail'" style="text-decoration: none; color:black;">{{freeboard.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
                     {{freeboard.commentCount}} </i>
@@ -240,11 +240,32 @@
   export default {
     data() {
       return {
-
+        fcolor : 'black'
       }
     },
+
     mounted() {
       this.$store.dispatch('getMainBestList', );
+
+    if(this.$cookies.isKey('isDark')){
+      this.fcolor = 'white'
+    } else{
+      this.fcolor = 'black'
+    }
+
+    },
+    methods:{
+      changeMainColor(){
+        console.log('Main updated')
+        if(this.$cookies.isKey('isDark')){
+          this.fcolor = 'white'
+        } else{
+          this.fcolor = 'black'
+        }
+        console.log(this.$child)
+
+      },
     }
   }
 </script>
+

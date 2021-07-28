@@ -28,7 +28,7 @@
         </b-button> -->
 
         <!-- 댓글 삭제 버튼-->
-        <b-button pill variant="light" v-show="com.comment_user_id = $session.get('userId')"
+        <b-button pill variant="light" v-show="com.comment_user_id == $session.get('userId')"
         @click="commentDelete(com.comment_id)">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
         </b-button>
@@ -42,6 +42,9 @@
         <br>
 
     <div>
+      <div>
+        
+      </div>
         <b-form-textarea
         id="textarea-state"
         v-model="content"
