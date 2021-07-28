@@ -68,8 +68,19 @@
   update board set pop = pop-1 where board_id= ${bId};
   </select>
   
+  <!-- 게시글 수정 -->
   <update id="update">
   update board set title=#{param3}, category = #{param2}, content=#{param4} where board_id= #{param1};
   </update>
+  
+  <!-- 댓글수 칼럼 조회 -->
+  <select id="commentCount" resultType="Int">
+  select commentCount from board where board_id = ${bId};
+  </select>
+  
+  <!-- 좋아요수 칼럼 조회 -->
+  <select id="countPop" resultType="Int">
+  select pop from board where board_id = ${bId};
+  </select>
   
  </mapper>

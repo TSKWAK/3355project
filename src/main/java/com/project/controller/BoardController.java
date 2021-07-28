@@ -43,11 +43,7 @@ public class BoardController {
 		public int getCount(@PathVariable("boardlist") String boardlist) {
 			int c = service.getCount(boardlist);
 			int count = (int)Math.ceil((double)c/10);
-//			int[] cnt = new int[count];
-//			
-//			for(int i = 0; i<=(count-1); i++) {
-//				cnt[i] = i+1;
-//			}
+			
 			return count;
 		}
 		
@@ -90,7 +86,6 @@ public class BoardController {
 			System.out.println(bId);
 			System.out.println(uId);
 			
-			
 			return result;
 		}
 		
@@ -106,7 +101,6 @@ public class BoardController {
 			System.out.println(board.getbId());
 			System.out.println(board.getC());
 			System.out.println(board.getT());
-			//System.out.println(board.getCon());
 			dao.update(board.getbId(), board.getC(), board.getT(), board.getCon());
 		}
 		
@@ -114,6 +108,19 @@ public class BoardController {
 		public void deleteWrite(@RequestParam("bId") int bId) {
 			System.out.println(bId);
 			dao.deleteWrite(bId);
+		}
+		
+		@GetMapping("commentCount")
+		public int commentCount(@RequestParam("bId") int bId) {
+			System.out.println(bId);
+			int count = dao.commentCount(bId);
+			return count;
+		}
+		
+		@GetMapping("countPop")
+		public int countPop(@RequestParam("bId") int bId) {
+			int count = dao.countPop(bId);
+			return count;
 		}
 		
 

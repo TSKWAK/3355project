@@ -160,7 +160,8 @@ export default {
   methods: {
     titleCheck(v){
         this.$store.dispatch('getDetail', {bId:v, uId:this.$session.get('userId')});
-        this.$store.dispatch('popCheck', {bId:v, uId: this.$session.get('userId')})
+        this.$store.dispatch('popCheck', {bId:v, uId: this.$session.get('userId')});
+        this.$store.dispatch('getCommentList', v);
         this.$store.commit("setBoardId", v)
         this.$router.push('/detail')
         console.log("v:",v)

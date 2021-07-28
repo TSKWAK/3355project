@@ -11,7 +11,7 @@
           {{detail.date}}</th>
           <th scope="col" style="text-align:right;">작성자:{{detail.user_id}}<br>
           조회: {{detail.hit}} / 댓글수: {{$store.state.commentCount}} / 
-            추천수: {{detail.pop}}</th>
+            추천수: {{$store.state.countPop}}</th>
 				</tr>
 			</thead>
 		</table>
@@ -26,7 +26,7 @@
       v-show="$store.state.popCheck != true"
       @click="addPop()">
       <span style="color:black; font-size:20px;" 
-      >{{detail.pop}}</span>
+      >{{$store.state.countPop}}</span>
       </i>
       
       <!-- 채워진 좋아요-->
@@ -34,7 +34,7 @@
       v-show="$store.state.popCheck == true"
       @click="deletePop()">
       <span style="color:black; font-size:20px;"
-      >{{detail.pop}}</span>
+      >{{$store.state.countPop}}</span>
       </i>
     </div>
 

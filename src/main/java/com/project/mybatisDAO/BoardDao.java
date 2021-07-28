@@ -21,4 +21,6 @@ public interface BoardDao {
 	String popCheck(int bId, String uId);
 	void update(int bod, String category, String title, String content);
 	void deleteWrite(int bId);
+	int commentCount(int bId);
+	int countPop(int bId);
 }

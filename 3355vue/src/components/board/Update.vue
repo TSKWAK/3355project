@@ -50,7 +50,8 @@
           >
           
         </b-form-textarea> -->
-        <vue-editor id="editor" v-model="getDetails.content"> </vue-editor>
+        <vue-editor id="editor" v-model="getDetails.content"
+        style="width:1350px;"> </vue-editor>
       </div>
       <br>
       <!-- 내용 입력 폼 끝 -->

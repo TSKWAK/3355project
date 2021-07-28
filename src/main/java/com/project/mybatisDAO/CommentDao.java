@@ -21,4 +21,8 @@ public interface CommentDao {
 
 	public void commentDelete(int bId, int cId);
 
+	public List<Comment> getCommentContent(int cId);
+
+	public void updateComment(String content, int cId);
+
 }
