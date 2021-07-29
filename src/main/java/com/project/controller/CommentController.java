@@ -40,8 +40,6 @@ public class CommentController {
 	@GetMapping("count")
 	public int getCommentCount(@RequestParam("bId") int bId){
 		int commentCount = dao.getCommentCount(bId);
-		System.out.println(bId);
-		System.out.println(commentCount);
 		
 		return commentCount;
 	}

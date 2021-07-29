@@ -56,6 +56,11 @@ const store =  new Vuex.Store({
     commentUpdateCheck: false,
     RecommentUpdateCheck: false,
     countPop: 0,
+    searchSelected: 'title',
+    searchSearch: '',
+    getDataError: true,
+    searchCheck: false,
+    searchQuery: '',
 
   },
 
@@ -153,7 +158,27 @@ const store =  new Vuex.Store({
 
     setCountPop: (state, payload) => {
       state.countPop = payload
-    }
+    },
+
+    setSearchSelected: (state, payload) => {
+      state.searchSelected = payload
+    },
+
+    setSearchSearch: (state, payload) => {
+      state.searchSearch = payload
+    },
+
+    setGetDataError: (state, payload) => {
+      state.getDataError = payload
+    },
+
+    setSearchCheck: (state, payload) => {
+      state.searchCheck = payload
+    },
+
+    setSearchQuery: (state, payload) => {
+      state.searchQuery = payload;
+    },
 
   },
 
@@ -161,21 +186,32 @@ const store =  new Vuex.Store({
   actions: {
     getData({ commit }, payload) {
       axios
-        .get("/api/board/" + payload.name + "?page=" + payload.page)
+        // .get("/api/board/" + payload.name + "?page=" + payload.page)
+        .get("/api/board/list?c=" + payload.name + "&p=" + payload.page + '&f=' + payload.f + '&s=' + payload.s)
         .then(res => {
+          this.dispatch('getCount', {category: payload.name, f:payload.f, s:payload.s})
           commit("boardUrl", payload.name),
           commit("getData", res.data)
           var blurb = Math.floor(Math.random() * 7)+1;
           commit("setBlurb", blurb)
+          console.log("글쓰기후겟데이타:", res.data)
+          if(res.data == ''){
+            commit("setGetDataError", false)
+          }else{
+            commit("setGetDataError", true)
+          }
+          console.log("검색없음 다음에 겟데이타에러", this.state.getDataError)
           })
           .catch(err => {
               console.log(err)
           });
       },
+      // {name: this.$store.state.categoryName, page:0, 
+      //   f:this.selected, s:this.search})
 
     getCount({ commit }, payload) {
       axios
-          .get("/api/board/count/"+payload)
+          .get("/api/board/count?c="+payload.category+"&f=" + payload.f + "&s=" + payload.s)
           .then(res => {
             commit("getCount", res.data)
           })
@@ -211,12 +247,12 @@ const store =  new Vuex.Store({
       axios
         .get("/api/board/detail/" + payload.bId)
         .then(res => {
+          commit("setBoardId", payload.bId)
+          commit("getDetail", res.data)
           this.dispatch("popCheck", { bId: payload.bId, uId: payload.uId });
           this.dispatch("getCommentList", payload.bId);
           this.dispatch("getReCommentList", payload.bId);
-          this.dispatch('countPop', payload.bId)
-          commit("getDetail", res.data)
-          commit("setBoardId", payload.bId)
+          this.dispatch('countPop', payload.bId);
         })
         .catch(err => {
           console.log(err)
@@ -243,7 +279,6 @@ const store =  new Vuex.Store({
             this.dispatch('countPop', payload.bId)
             commit("popCheck", true)
             // this.dispatch("getDetail", { bId: payload.bId, uId: payload.uId })
-            commit("getCount", res.data)
           }
         })
         .catch(err => {
@@ -323,7 +358,7 @@ const store =  new Vuex.Store({
         axios
           .get('/api/board/comment/list?bId='+payload)
           .then(res => {
-            commit('setCommentList', res.data),
+            commit('setCommentList', res.data)
             this.dispatch('commentCount', payload)
           })
           .catch(err => {
@@ -378,19 +413,20 @@ const store =  new Vuex.Store({
       },
 
     boardWrite({commit}, payload){
-        axios.
-          post('/api/board/write',payload)
-          .then(res=>{
+        axios
+          .post('/api/board/write',payload.board)
+          .then(res =>{
               this.dispatch('getData', {name: payload.category, 
-              page: 1})
+              page: 0})
               this.dispatch('getCount', payload.category)
               this.dispatch('getDayCount', )
               console.log(this.state.boardlist)
-          })
+              })
           .catch(err=>{
               alert(err+' 다시 등록해주세요')
               console.log(err)
-          });
+          })
+        
         },
 
     addReComment({commit}, payload){

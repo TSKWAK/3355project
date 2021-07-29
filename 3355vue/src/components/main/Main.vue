@@ -26,7 +26,7 @@
             @click="
             $store.dispatch('getDetail', {bId: freeboard.board_id, uId: $session.get('userId')}), 
             $store.commit('setBoardId', freeboard.board_id),
-            $store.commit('boardUrl', freeboard.category)">
+            $store.commit('setCategoryName', freeboard.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{freeboard.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -55,7 +55,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: soccer.board_id, uId: soccer.user_id}), 
             $store.commit('setBoardId', soccer.board_id),
-            $store.commit('boardUrl', soccer.category)">
+            $store.commit('setCategoryName', soccer.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{soccer.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -83,7 +83,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: baseball.board_id, uId: baseball.user_id}), 
             $store.commit('setBoardId', baseball.board_id),
-            $store.commit('boardUrl', baseball.category)">
+            $store.commit('setCategoryName', baseball.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{baseball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -111,7 +111,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: basketball.board_id, uId: basketball.user_id}),
             $store.commit('setBoardId', basketball.board_id),
-            $store.commit('boardUrl', basketball.category)">
+            $store.commit('setCategoryName', basketball.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{basketball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -139,7 +139,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: bollyball.board_id, uId: bollyball.user_id}),
             $store.commit('setBoardId', bollyball.board_id),
-            $store.commit('boardUrl', bollyball.category)">
+            $store.commit('setCategoryName', bollyball.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{bollyball.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -167,7 +167,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: tenis.board_id, uId: tenis.user_id}),
             $store.commit('setBoardId', tenis.board_id),
-            $store.commit('boardUrl', tenis.category)">
+            $store.commit('setCategoryName', tenis.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{tenis.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -195,7 +195,7 @@
             <td
             @click="$store.dispatch('getDetail', {bId: golf.board_id, uId: golf.user_id}),
             $store.commit('setBoardId', golf.board_id),
-            $store.commit('boardUrl', golf.category)">
+            $store.commit('setCategoryName', golf.category)">
             <router-link :to="'/detail'" style="text-decoration: none; color:black;">{{golf.title}}</router-link>
               <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">

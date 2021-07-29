@@ -2,7 +2,6 @@
           <div container style="col-lg-12 col-md-8 col-sm-3 col-xs-1 margin-bottom:900px;"  >
             <div>
                 <h1 style="margin-right:200px;">인기글 TOP3</h1>
-              <form class="d-flex" method = "get">
 
                 <!-- 인기글 리스트 테이블 -->
               <table class="type06" width="90%" style="margin-top:10px; weight:bold;">
@@ -16,7 +15,7 @@
               <tr v-for="(bestlist,i) in $store.state.bestlist" :key="i">
                   <th scope="row">best{{i+1}}</th>
                   <td class="title" 
-                  @click="titleCheck(bestlist.board_id)">
+                  @click="titleCheck(bestlist.board_id, bestlist.category)">
                     {{bestlist.title}} 
                   <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -35,7 +34,6 @@
               </table>
               <!-- 인기글 리스트 끝 -->
                 
-             </form>
             </div>
 
 
@@ -43,6 +41,38 @@
 
               <!-- 리스트 테이블 -->
               <h2 style="margin-right:200px;">{{$store.state.categoryName}}</h2>
+                      <b-form method = "get">
+              <div class="container" style="">
+                <div class="row" style="float:right;">
+                      <!-- <select class="form-select" aria-label="Default select example" 
+                      style="width:100px; margin-right:10px;" v-model="selected">
+                        <option selected>{{selected}}</option>
+                        <option value="user_id">작성자</option>
+                      </select>
+                      {{select}} -->
+                          <b-form-select 
+                          v-model="selected" 
+                          :options="options" 
+                          size="sm" 
+                          style="width:100px; margin-right:10px;"
+                          class="form-select"
+                          ></b-form-select>
+
+                      <b-form-input
+                        id="inline-form-input-name"
+                        class="mb-2 mr-sm-2 mb-sm-0"
+                        style="width:300px;"
+                        placeholder="검색어를 입력해주세요"
+                        v-model='search'
+                      ></b-form-input>
+                      <b-button style="width:70px;" @click="goSearch()">검색</b-button>
+              </div>
+              </div>
+                      </b-form>
+              <span v-show="$store.state.searchCheck == true"
+              style="font-size:20px; float:left;">"<strong>{{$store.state.searchQuery}}</strong>"의 검색결과</span>
+              <br>
+              <br>
 
               <table class="type06" width="90%" style="margin-top:10px; weight:bold;">
               <tr>
@@ -52,10 +82,11 @@
                   <td>date</td>
                   <td>hit</td>
               </tr>
-              <tr v-for="(boardlist,i) in $store.state.boardlist" :key="i">
+              <tr v-for="(boardlist,i) in $store.state.boardlist" :key="i"
+              v-show="$store.state.getDataError == true">
                   <th scope="row">{{boardlist.rownum}}</th>
                   <td class="title" 
-                  @click="titleCheck(boardlist.board_id)">
+                  @click="titleCheck(boardlist.board_id, boardlist.category)">
                     {{boardlist.title}} 
                   <span style="color:pink; float:right;">
                   <i class="fa fa-commenting-o" aria-hidden="true">
@@ -72,7 +103,11 @@
                   <td style="width: 150px">{{boardlist.user_id}}</td>
                   <td style="width: 200px">{{boardlist.date}}</td>
                   <td style="width: 130px">{{boardlist.hit}}</td>
+
               </tr>
+                  <td v-show="$store.state.getDataError == false" 
+                  style="width:800px; font-size:50px;">
+                    검색결과가 없습니다</td>
               </table>
               <!-- 리스트 테이블 끝 -->
 
@@ -90,7 +125,7 @@
 
 
               <!-- 이전페이지 -->
-              <div style="text-align:center; margin-bottom:50px;" >
+                  <div style="text-align:center; margin-bottom:50px;" >
               <nav aria-label="Page navigation example" style="margin-left:35%">
                 <ul class="pagination" >
                   <li class="page-item">
@@ -100,7 +135,8 @@
                     page: $store.state.startnum-1, paging: $store.state.startnum-1}),
 
                     $store.dispatch('getData', 
-                    {name: $store.state.url, page: $store.state.page})"
+                    {name: $store.state.url, page: $store.state.page, 
+                    f: $store.state.searchSelected, s: $store.state.searchSearch})"
 
                     v-if="$store.state.startnum != 1">
                       <span aria-hidden="false">&laquo;</span>
@@ -114,7 +150,8 @@
                     <a class="page-link" 
                     @click="$store.commit('changePage', { startnum: $store.state.startnum, 
                     page: $store.state.startnum+i, paging: $store.state.startnum+i}),
-                    $store.dispatch('getData', {name: $store.state.url, page: $store.state.page})"
+                    $store.dispatch('getData', {name: $store.state.url, page: $store.state.page,
+                    f: $store.state.searchSelected, s: $store.state.searchSearch})"
                     v-if="$store.state.startnum+i <= $store.state.count">
 
                     {{$store.state.startnum+i}}
@@ -129,7 +166,8 @@
                     @click="$store.commit('changePage', { startnum: $store.state.startnum+5, 
                     page: $store.state.startnum+5, paging: $store.state.startnum+5}),
                     $store.dispatch('getData', 
-                    {name: $store.state.url, page: $store.state.page})
+                    {name: $store.state.url, page: $store.state.page,
+                    f: $store.state.searchSelected, s: $store.state.searchSearch})
                     "
                     v-if="$store.state.startnum+5 <= $store.state.count">
                       <span aria-hidden="true">&raquo;</span>
@@ -154,17 +192,34 @@ export default {
       page: 1,
       paging: 1,
       startnum: 1,
+      selected: 'title',
+        options: [
+          { value: 'title', text: '제목' },
+          { value: 'user_id', text: '작성자' },
+        ],
+      search: '',
 
     }
   },
   methods: {
-    titleCheck(v){
+    titleCheck(v, b){
         this.$store.dispatch('getDetail', {bId:v, uId:this.$session.get('userId')});
-        this.$store.dispatch('popCheck', {bId:v, uId: this.$session.get('userId')});
-        this.$store.dispatch('getCommentList', v);
-        this.$store.commit("setBoardId", v)
         this.$router.push('/detail')
+        this.$store.commit('setCategoryName', b)
         console.log("v:",v)
+    },
+    goSearch(){
+      this.$store.commit('setSearchSelected', this.selected)
+      this.$store.commit('setSearchSearch', this.search)
+      this.$store.commit('changePage', {startnum: 1, page: 1, paging: 1})
+      this.$store.dispatch('getCount', {category: this.$store.state.categoryName, 
+      f:this.selected, s:this.search})
+      this.$store.dispatch('getData', {name: this.$store.state.categoryName, page:0, 
+      f:this.selected, s:this.search})
+      
+      this.$store.commit('setSearchQuery', this.search)
+      this.$store.commit('setSearchCheck', true)
+      this.search = ''
     },
   }
 }

@@ -122,7 +122,7 @@ export default {
 
         if(this.board.title.length > 1 && this.board.category != this.str 
           && this.board.content.length > 5){
-            this.$store.dispatch('boardWrite', this.board)
+            this.$store.dispatch('boardWrite', {board: this.board, category: this.board.category});
             alert('게시글이 등록되었습니다')
             this.$router.push('/board/'+this.board.category)
       }else if(this.board.title.length < 1){

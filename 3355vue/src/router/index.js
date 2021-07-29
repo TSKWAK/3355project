@@ -13,7 +13,7 @@ const routes = [
   meta:{unauthorized : true}},
   { path: '/detail', name: 'detail', component: () => import('@/components/board/Detail.vue'), 
   meta:{unauthorized : true}},
-  { path: '/comment', name: 'comment', component: () => import('@/components/board/Comment.vue'), 
+  { path: '/comment', name: 'comment', component: () => import('@/components/comment/Comment.vue'), 
   meta:{unauthorized : true}},
   { path: '/write', name: 'write', component: () => import('@/components/board/Write.vue'), 
   meta:{unauthorized : true}},

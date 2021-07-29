@@ -26,9 +26,20 @@ public class BoardController {
 		@Autowired
 		private BoardDao dao;
 		
-		@RequestMapping("{boardlist}")
-		public List<Board> list(@PathVariable("boardlist") String boardlist, @RequestParam("page") int page) {
-			List<Board> list = service.getList(boardlist, page);
+		@RequestMapping("list")
+		public List<Board> list(@RequestParam("c") String boardlist, @RequestParam("p") int page,
+				@RequestParam("f") String ffield, @RequestParam("s") String ssearch) {
+			
+			String field = "title";
+			if(ffield.equals("undefined")) field = field;
+			else field = ffield;
+			
+			String search = "";
+			if(ssearch.equals("undefined")) search = search;
+			else search = ssearch;
+			
+			List<Board> list = dao.getList(boardlist, page, field, search);
+			System.out.println("리스트는"+list);
 			return list;
 		}
 		
@@ -39,9 +50,18 @@ public class BoardController {
 			return list;
 		}
 		
-		@RequestMapping("count/{boardlist}")
-		public int getCount(@PathVariable("boardlist") String boardlist) {
-			int c = service.getCount(boardlist);
+		@RequestMapping("count")
+		public int getCount(@RequestParam("c") String category, @RequestParam("f") String ffield, @RequestParam("s") String ssearch) {
+			System.out.println("fsdfasdfsdfsdafsa:"+ffield+","+ssearch);
+			String field = "title";
+			if(ffield.equals("undefined")) field = field;
+			else field = ffield;
+			
+			String search = "";
+			if(ssearch.equals("undefined")) search = search;
+			else search = ssearch;
+			
+			int c = dao.getCount(category, field, search);
 			int count = (int)Math.ceil((double)c/10);
 			
 			return count;
@@ -75,7 +95,6 @@ public class BoardController {
 		public String addPop(@RequestParam("bId") int bId, @RequestParam("uId") String uId) {
 			System.out.println("bid:"+bId+","+"uid:"+uId);
 			String result = dao.addPop(bId, uId);
-			System.out.println("addpopResult"+result);
 
 			return result;
 		}

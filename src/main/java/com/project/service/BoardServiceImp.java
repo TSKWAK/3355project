@@ -14,17 +14,17 @@ public class BoardServiceImp implements BoardService{
 		@Autowired
 		private BoardDao dao;
 		
-		@Override
-		public List<Board> getList(String boardlist, int page) {
-			List<Board> list = dao.getList(boardlist, page);
-			return list;
-		}
-
-		@Override
-		public int getCount(String boardlist) {
-			int page = dao.getCount(boardlist);
-			return page;
-		}
+//		@Override
+//		public List<Board> getList(String boardlist, int page) {
+//			List<Board> list = dao.getList(boardlist, page);
+//			return list;
+//		}
+//
+//		@Override
+//		public int getCount(String boardlist) {
+//			int page = dao.getCount(boardlist);
+//			return page;
+//		}
 
 		@Override
 		public List<Board> getDetail(int boardid) {

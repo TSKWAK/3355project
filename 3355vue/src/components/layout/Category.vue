@@ -8,12 +8,15 @@
           v-for="(category,i) in $store.state.category" :key="i">
           <b-button v-b-tooltip.hover.right 
            style="width:200px; text-decoration:none; color:white;"
-            @click="$store.dispatch('getData', {name: category.name, page: 0}),
+            @click="$store.commit('setSearchSelected', 'title')
+                    $store.commit('setSearchSearch', '')
+                    $store.dispatch('getData', {name: category.name, page: 0}),
                     $store.dispatch('getBestList', category.name),
-                    $store.dispatch('getCount', category.name),
+                    $store.dispatch('getCount', {category: category.name}),
                     $store.commit('changePage', {page: 1, paging: 1, startnum: 1}),
                     $store.commit('setCategoryName', category.name),
-                    $store.dispatch('getDayCount', )"
+                    $store.dispatch('getDayCount', ),
+                    $store.commit('setSearchCheck', false)"
                     :to="`/board/`+category.name"
           
           :title="$store.state.dayCount2[i] + '개의 새 글이 있어요!'"

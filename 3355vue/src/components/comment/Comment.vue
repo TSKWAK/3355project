@@ -178,10 +178,10 @@
 </template>
 
 <script>
-import CommentReplyWrite from '@/components/board/CommentReplyWrite.vue'
-import CommentReplyWrite2 from '@/components/board/CommentReplyWrite2.vue'
-import CommentReplyUpdate from '@/components/board/CommentReplyUpdate.vue'
-import CommentReplyUpdate2 from '@/components/board/CommentReplyUpdate2.vue'
+import CommentReplyWrite from '@/components/comment/CommentReplyWrite.vue'
+import CommentReplyWrite2 from '@/components/comment/CommentReplyWrite2.vue'
+import CommentReplyUpdate from '@/components/comment/CommentReplyUpdate.vue'
+import CommentReplyUpdate2 from '@/components/comment/CommentReplyUpdate2.vue'
 export default {
     data() {
       return {
@@ -209,9 +209,9 @@ export default {
         CommentReplyUpdate2,
     },
 
-    mounted() {
-        this.$store.dispatch('getCommentList', this.$store.state.boardId)
-    },
+    // mounted() {
+    //     this.$store.dispatch('getCommentList', this.$store.state.boardId)
+    // },
 
     methods: {
       addComment(){

@@ -1,7 +1,9 @@
 <template>
   <div>
     <div v-for="(detail,i) in $store.state.detail" :key="i">
-
+      <b-button style="float:left;" @click="backButton()">목록</b-button>
+      
+      <br><br>
    <hr>
 
    <table class="table" style="width:98%">
@@ -71,7 +73,7 @@
 </template>
 
 <script>
-import Comment from '@/components/board/Comment.vue'
+import Comment from '@/components/comment/Comment.vue'
 import axios from 'axios'
 export default {
   data(){
@@ -115,14 +117,25 @@ export default {
         .then(res => {
           console.log(this.$store.state.detail[0].board_id)
           alert('삭제되었습니다')
-          this.$store.dispatch('getData', {name: this.$store.state.detail[0].category, page: this.$store.state.paging});
-          this.$router.push('/board/'+this.$store.state.detail[0].category)
+          this.$store.dispatch('getBestList', this.$store.state.categoryName)
+          this.$store.dispatch('getData', {name: this.$store.state.categoryName, 
+          page: 0, f:this.$store.state.searchSelected, s:this.$store.state.searchSearch})
+          this.$store.commit('changePage', {page:0, paging:1})
+
+          this.$router.push('/board/'+this.$store.state.categoryName)
           })
         .catch(err => {
           console.log(err)
           console.log(this.$store.state.detail[0].board_id)
         });
     },
+
+    backButton(){
+      this.$store.dispatch('getData', {name: this.$store.state.categoryName, 
+      page:this.$store.state.page, f:this.$store.state.searchSelected, s:this.$store.state.searchSearch})
+      this.$store.dispatch('getBestList', this.$store.state.categoryName)
+      this.$router.push('/board/'+this.$store.state.categoryName)
+    }
   }
   
 

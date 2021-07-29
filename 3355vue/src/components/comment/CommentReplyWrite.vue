@@ -13,7 +13,7 @@
          <!-- <b-button style="float:right;" @click="$store.dispatch('addReComment', 
             {bId: $store.state.boardId, uId:$session.get('userId'), cId: commentId,
             content: reCommentContent})">확인</b-button> -->
-            <b-button @click="addReComment()">ggg</b-button>
+            <b-button style="float:right;" @click="addReComment()">등록</b-button>
     </div> 
     <br><br>
 
