@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd%22%3E">
 <mapper namespace="com.project.mybatisDAO.CommentDao">
 
 <!-- 댓글 추가 -->
@@ -9,7 +9,7 @@
   insert into comment(content, comment_user_id, comment_board_id) values (#{content}, #{uId}, #{bId});
   update board set commentCount = commentCount+1 where board_id= ${bId};
   </select>
-  
+
   <!-- 댓글 리스트 -->
   <select id="getCommentList" resultType="com.project.entity.Comment">
   select * from comment where comment_board_id = ${bId};

@@ -69,7 +69,9 @@ public class BoardController {
 		
 		@RequestMapping("detail/{boardid}")
 		public List<Board> detail(@PathVariable("boardid") int boardid){
+			System.out.println("boardid=" + boardid);
 			List<Board> detail = service.getDetail(boardid);
+			System.out.println("detail=" + detail);
 			return detail;
 		}
 		

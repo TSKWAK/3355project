@@ -16,7 +16,8 @@
                     $store.commit('changePage', {page: 1, paging: 1, startnum: 1}),
                     $store.commit('setCategoryName', category.name),
                     $store.dispatch('getDayCount', ),
-                    $store.commit('setSearchCheck', false)"
+                    $store.commit('setSearchCheck', false),
+                    $parent.changeImg(category.name)"
                     :to="`/board/`+category.name"
           
           :title="$store.state.dayCount2[i] + '개의 새 글이 있어요!'"
@@ -47,3 +48,4 @@ export default {
 }
 
 </script>
+

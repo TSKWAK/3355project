@@ -278,7 +278,6 @@ const store =  new Vuex.Store({
           if (res.data = 'null' && res.data == '') {
             this.dispatch('countPop', payload.bId)
             commit("popCheck", true)
-            // this.dispatch("getDetail", { bId: payload.bId, uId: payload.uId })
           }
         })
         .catch(err => {
@@ -485,4 +484,3 @@ const store =  new Vuex.Store({
 })
     
     export default store
-  

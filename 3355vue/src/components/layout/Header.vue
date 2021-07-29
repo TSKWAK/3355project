@@ -6,7 +6,10 @@
       <b-navbar-brand :to="'/'" style="text-decoration:none; color: white;">
       <b-img :src="require('@/assets/logo.png')" style="width:30px;"></b-img>
       3355
+
+      <b-button @click="changeMode" variant="outline-light" style="margin:5px;">{{mode}}</b-button>
       </b-navbar-brand>
+      
 
 
           
@@ -53,11 +56,15 @@
 export default {
   data(){
     return{
+      mode:'',
       message:'',
-      MainImg: require('../../assets/soccer.jpg'),
+      MainImg: require('../../assets/mainimge.jpg'),
     }
   },
   methods: {
+    changeImage(image){
+      this.MainImg = require('../../assets/'+image)
+    },
     logInOut(){
       if(this.message=='Login'){
         this.$router.push('/login').catch(()=>{});
@@ -75,14 +82,32 @@ export default {
         this.$session.destroy("status")
         alert('로그아웃되었습니다.')
         this.message = 'Login'
-        this.$router.go();
+        this.$router.push('/login')
       }
+    },
 
-
-      
+    changeMode(){
+      if(this.$cookies.isKey('isDark')){
+      this.mode = 'Light'
+      this.$cookies.remove("isDark");
+    } else{
+      this.mode = 'Dark'
+      this.$cookies.set("isDark", true);
     }
+      this.$parent.changeColor()
+    },
+
+    
   },
+
   mounted(){
+    if(this.$cookies.isKey('isDark')){
+      this.mode = 'Dark'
+    } else{
+      this.mode = 'Light'
+    }
+    
+
     console.log('mounted')
     if(this.$session.has('accesstoken')){
       this.message = 'Logout'
@@ -93,6 +118,11 @@ export default {
 
   beforeUpdate(){
     console.log('updated')
+    if(this.$cookies.isKey('isDark')){
+      this.mode = 'Dark'
+    } else{
+      this.mode = 'Light'
+    }
     if(this.$session.has('accesstoken')){
       this.message = 'Logout'
     } else{

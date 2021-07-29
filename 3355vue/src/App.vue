@@ -1,26 +1,26 @@
 <template>
 <div id="app">
+  <div v-bind:style="{color: fcolor, backgroundColor: bcolor}">
+    <Header/> <br>
+        <div class="row">
+            <div class="cols col-md-4 col-lg-3" style="margin-top: 30px">
+              <Category/>
 
-  <Header/> <br>
-      <div class="row">
-          <div class="cols col-md-4 col-lg-3" style="margin-top: 30px">
-            <Category/>
+              <div>
+              <Blurb/>
+              </div>
 
-            <div>
-            <Blurb/>
+
+
             </div>
 
+            <div class="cols col-sm-12 col-md-8 col-lg-9" style="margin-top: 30px">
+              <router-view/>
+            </div>
+        </div> 
 
-
-          </div>
-
-          <div class="cols col-sm-12 col-md-8 col-lg-9" style="margin-top: 30px">
-            <router-view/>
-          </div>
-      </div> 
-
-      <Footer/>
-
+        <Footer/>
+  </div>
 </div>
 </template>
 
@@ -33,14 +33,46 @@ import Footer from '@/components/layout/Footer.vue'
 export default {
   data(){
     return{
+      fcolor : 'black',
+      bcolor : 'white',
       name: 'App',
       category2: ['freeboard', 'soccer', 'baseball', 'basketball', 'bollyball', 'tenis', 'golf']
     }
   },
   mounted(){
     this.$store.dispatch('getDayCount',)
+
+    if(this.$cookies.isKey('isDark')){
+      this.fcolor = 'white'
+      this.bcolor = 'black'
+    } else{
+      this.bcolor = 'white'
+      this.fcolor = 'black'
+    }
+
   },
+
+
   methods:{
+    changeColor(){
+    console.log('app updated')
+     if(this.$cookies.isKey('isDark')){
+      this.fcolor = 'white'
+      this.bcolor = 'black'
+    } else{
+      this.bcolor = 'white'
+      this.fcolor = 'black'
+    }
+    this.$children[4].changeMainColor()
+  },
+  changeImg(image){
+        console.log(image)
+        if(image=='freeboard'){
+          image = 'mainimge'
+        }
+
+        this.$children[0].changeImage(image+'.jpg')
+      }
     //   getDayCount(){
     // for(var i=0; i<this.category2.length; i++)
     //     axios
@@ -72,7 +104,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 
 #nav {
@@ -81,11 +112,19 @@ export default {
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+}
+/* 
+#nav a.router-link-exact-active {
+} */
+
+.Light {
+  background-color : #ffffff;
+  color: #000000;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.Dark {
+  background-color : #000000;
+  color: #ffffff;
 }
 
 </style>

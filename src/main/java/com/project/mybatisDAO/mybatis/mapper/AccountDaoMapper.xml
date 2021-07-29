@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd%22%3E">
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd%22%3E%22%3E">
 
 <mapper namespace="com.project.mybatisDAO.AccountDao">
 
@@ -12,7 +12,7 @@
 
   <!-- 특정유저 보기 -->
   <select id="viewUser" resultType="Int">
-    select count(*) from Users where userId = #{param1} and social = #{param2}
+    select count() from Users where userId = #{param1} and social = #{param2}
   </select>
 
   <!-- 유저추가하기 -->
@@ -27,7 +27,7 @@
 
   <!-- 유저 로그인 -->
   <select id="loginUser" resultType="Int">
-      select count(*) from Users where userId = #{param1} and userPw = sha1(#{param2})
+      select count() from Users where userId = #{param1} and userPw = sha1(#{param2})
   </select>
 
   <!-- 소셜 유저추가 -->

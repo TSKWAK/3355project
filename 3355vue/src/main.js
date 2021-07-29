@@ -12,9 +12,12 @@ import BootstrapVueIcons from  'bootstrap-vue'
 import IconsPlugin from 'bootstrap-vue'
 import { JumbotronPlugin } from 'bootstrap-vue'
 import { VueEditor } from "vue2-editor";
+import VueCookies from "vue-cookies";
 
 
 Vue.use(JumbotronPlugin)
+
+Vue.use(VueCookies);
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
