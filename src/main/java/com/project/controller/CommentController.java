@@ -46,6 +46,7 @@ public class CommentController {
 	
 	@GetMapping("delete")
 	public void commentDelete(@RequestParam("bId") int bId, @RequestParam("cId") int cId){
+		System.out.println("코멘트삭제cId:"+cId);
 		dao.commentDelete(bId, cId);
 	}
 	

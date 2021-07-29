@@ -27,8 +27,10 @@
   
   <!-- 댓글 삭제 -->
   <select id="commentDelete">
+  update board set commentCount = (commentCount-(select count(*) from recomment 
+  where recomment_comment_id=${cId})-1) where board_id= ${bId};
   delete from comment where comment_id = ${cId} and comment_board_id = ${bId};
-  update board set commentCount = commentCount-1 where board_id= ${bId};
+<!--   update board set commentCount = commentCount-1 where board_id= ${bId}; -->
   </select>
   
   <!-- 댓글 수정 -->

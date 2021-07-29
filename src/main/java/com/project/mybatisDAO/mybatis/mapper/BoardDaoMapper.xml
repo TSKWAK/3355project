@@ -44,10 +44,10 @@
   
   <!-- 게시판 글 삭제 -->
   <select id="deleteWrite" >
-  set foreign_key_checks = 0;
-  delete from comment where comment_board_id=${bId};
+  <!-- set foreign_key_checks = 0; -->
+  <!-- delete from comment where comment_board_id=${bId}; -->
   delete from board where board_id=${bId};
-  set foreign_key_checks = 1;
+  <!-- set foreign_key_checks = 1; -->
   </select>
   
   <!-- 카테고리 새글 조회 -->
