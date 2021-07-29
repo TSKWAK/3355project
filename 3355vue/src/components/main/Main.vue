@@ -262,9 +262,11 @@
         } else{
           this.fcolor = 'black'
         }
-        console.log(this.$child)
-
       },
+
+      changeImage(image){
+        
+      }
     }
   }
 </script>

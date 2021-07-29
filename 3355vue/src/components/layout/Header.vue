@@ -58,10 +58,13 @@ export default {
     return{
       mode:'',
       message:'',
-      MainImg: require('../../assets/soccer.jpg'),
+      MainImg: require('../../assets/mainimge.jpg'),
     }
   },
   methods: {
+    changeImage(image){
+      this.MainImg = require('../../assets/'+image)
+    },
     logInOut(){
       if(this.message=='Login'){
         this.$router.push('/login').catch(()=>{});

@@ -65,6 +65,14 @@ export default {
     }
     this.$children[4].changeMainColor()
   },
+  changeImg(image){
+        console.log(image)
+        if(image=='freeboard'){
+          image = 'mainimge'
+        }
+
+        this.$children[0].changeImage(image+'.jpg')
+      }
     //   getDayCount(){
     // for(var i=0; i<this.category2.length; i++)
     //     axios
