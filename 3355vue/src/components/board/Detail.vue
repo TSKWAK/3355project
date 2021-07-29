@@ -120,7 +120,8 @@ export default {
           this.$store.dispatch('getBestList', this.$store.state.categoryName)
           this.$store.dispatch('getData', {name: this.$store.state.categoryName, 
           page: 0, f:this.$store.state.searchSelected, s:this.$store.state.searchSearch})
-          this.$store.commit('changePage', {page:0, paging:1})
+          this.$store.dispatch('getDayCount', )
+          this.$store.commit('changePage', {page:1, paging:1})
 
           this.$router.push('/board/'+this.$store.state.categoryName)
           })

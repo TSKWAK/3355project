@@ -41,7 +41,7 @@
 
               <!-- 리스트 테이블 -->
               <h2 style="margin-right:200px;">{{$store.state.categoryName}}</h2>
-                      <b-form method = "get">
+              <b-form method = "get" >
               <div class="container" style="">
                 <div class="row" style="float:right;">
                       <!-- <select class="form-select" aria-label="Default select example" 

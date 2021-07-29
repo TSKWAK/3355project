@@ -417,9 +417,9 @@ const store =  new Vuex.Store({
           .then(res =>{
               this.dispatch('getData', {name: payload.category, 
               page: 0})
+              this.dispatch('getBestList', payload.category)
               this.dispatch('getCount', payload.category)
               this.dispatch('getDayCount', )
-              console.log(this.state.boardlist)
               })
           .catch(err=>{
               alert(err+' 다시 등록해주세요')

@@ -124,7 +124,7 @@ export default {
           && this.board.content.length > 5){
             this.$store.dispatch('boardWrite', {board: this.board, category: this.board.category});
             alert('게시글이 등록되었습니다')
-            this.$router.push('/')
+            this.$router.push('/board/'+this.board.category)
       }else if(this.board.title.length < 1){
         alert('제목을 1자 이상 입력해주세요')
       }else if(this.board.category === this.str){
