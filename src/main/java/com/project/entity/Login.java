@@ -16,7 +16,9 @@ public class Login {
 	private String userId;
 	private String userPw;
 	
-	
+	public Login() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Login(String userId, String userPw) {
 		this.userId = userId;
